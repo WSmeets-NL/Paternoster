@@ -7,7 +7,7 @@ namespace Paternoster.Models
         [Required]
         public int Id { get; set; }
         [Required]
-        public ProductPart PartUsed { get; set; }
+        public Part Part { get; set; }
 
         public int PartId { get; set; }
 
@@ -16,11 +16,11 @@ namespace Paternoster.Models
 
         public int ProductId { get; set; }
 
-        public ProductPart(int id, ProductPart partUsed, Product product)
+        public ProductPart(int id, ProductPart part, Product product)
         {
             Id = id;
-            PartUsed = partUsed;
-            PartId = PartUsed.Id;
+            Part = part;
+            PartId = Part.Id;
             Product = product;
             ProductId = product.Id;
         }

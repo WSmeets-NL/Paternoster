@@ -12,18 +12,18 @@ namespace Paternoster.Models
         public string PartCode { get; set; }
 
         [Required]
-        public PaternosterContainer AssignedContainer { get; set; }
+        public PaternosterContainer Container { get; set; }
 
         public int ContainerId { get; set; }
 
-        public List<ProductPart> UsedInProducts { get; set; } = new List<ProductPart>();
+        public List<ProductPart> Products { get; set; } = new List<ProductPart>();
 
-        public Part(int id, string partCode, PaternosterContainer assignedContainer)
+        public Part(int id, string partCode, PaternosterContainer container)
         {
             Id = id;
             PartCode = partCode;
-            AssignedContainer = assignedContainer;
-            ContainerId = assignedContainer.Id;
+            Container = container;
+            ContainerId = container.Id;
         }
     }
 }
