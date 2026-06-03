@@ -9,8 +9,7 @@ namespace Paternoster.Models
         [Required]
         public string ContainerCode { get; set; }
 
-        [Required]
-        public Part Part { get; set; }
+        public Part? Part { get; set; }
 
         public int PartId { get; set; }
 
@@ -21,15 +20,6 @@ namespace Paternoster.Models
 
         public int PartAmount { get; set; }
 
-        public PaternosterContainer(int id, string containerCode, Part containedPart, Paternoster associatedPaternoster)
-        {
-            Id = id;
-            ContainerCode = containerCode;
-            ContainedPart = containedPart;
-            ContainedPartId = containedPart.Id;
-            AssociatedPaternoster = associatedPaternoster;
-            AssociatedPaternosterId = associatedPaternoster.Id;
-        }
 
     }
 

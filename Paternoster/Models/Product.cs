@@ -14,10 +14,5 @@ namespace Paternoster.Models
 
         public List<ProductPart> ProductParts { get; set; } = new List<ProductPart>();
 
-        public Product(int id, string productCode) 
-        {
-            Id = id;
-            ProductCode = productCode;
-        }
     }
 }

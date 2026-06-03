@@ -22,14 +22,6 @@ namespace Paternoster.Models
 
         public string? Location { get; set; }
 
-        public Paternoster(int id, string paternosterCode, PaternosterSystem associatedPaternosterSystem)
-        {
-            Id = id;
-            PaternosterCode = paternosterCode;
-            AssociatedPaternosterSystem = associatedPaternosterSystem;
-            PaternosterSystemId = associatedPaternosterSystem.Id;
-        }
-
         public void AddContainer(PaternosterContainer container)
             {
                 if (Containers.Count < NumberOfContainers)

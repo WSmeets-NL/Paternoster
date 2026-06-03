@@ -22,35 +22,37 @@ namespace Paternoster.DAL
 
         public DbSet<Order> Orders { get; set; }
 
-        public TodoDbContext(DbContextOptions<PaternosterDbContext> options) : base(options)
+        public PaternosterDbContext(DbContextOptions<PaternosterDbContext> options) : base(options)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Models.Paternoster>()
-                .HasOne(s => s.PaternosterSystem)
-                .WithMany(p => p.Paternosters)
+                .HasOne(p => p.PaternosterSystem)
+                .WithMany(s => s.Paternosters)
                 .HasForeignKey(p => p.PaternosterSystemId);
 
             modelBuilder.Entity<PaternosterContainer>()
-                .HasOne(p => p.Paternoster)
-                .WithMany(c => c.Containers)
+                .HasOne(c => c.Paternoster)
+                .WithMany(p => p.Containers)
                 .HasForeignKey(c => c.PaternosterId);
 
             modelBuilder.Entity<Part>()
-                .HasOne(c => c.Container)
-                .WithOne(p => p.Part);
+                .HasOne(p => p.Container)
+                .WithOne(c => c.Part)
+                .HasForeignKey<Part>(p => p.ContainerId)
+                .IsRequired();
 
             modelBuilder.Entity<ProductPart>()
                 .HasOne(pp => pp.Part)
-                .WithMany(pr => pr.Products)
-                .HasForeignKey(pr => pr.ProductId);
+                .WithMany(p => p.Products)
+                .HasForeignKey(pp => pp.PartId);
 
             modelBuilder.Entity<ProductPart>()
                 .HasOne(pp => pp.Product)
                 .WithMany(pr => pr.ProductParts)
-                .HasForeignKey(pr => pr.ProductId);
+                .HasForeignKey(pp => pp.ProductId);
 
             modelBuilder.Entity<OrderLine>()
                 .HasOne(pr => pr.Product)
@@ -58,12 +60,9 @@ namespace Paternoster.DAL
                 .HasForeignKey(pr => pr.ProductId);
 
             modelBuilder.Entity<OrderLine>()
-                .HasOne(o => o.Order)
-                .WithMany(ol => ol.OrderLines)
+                .HasOne(ol => ol.Order)
+                .WithMany(o => o.OrderLines)
                 .HasForeignKey(ol => ol.OrderId);
-
-
         }
-
     }
 }

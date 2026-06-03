@@ -17,17 +17,7 @@ namespace Paternoster.Models
         public int OrderId { get; set; }
 
         [Required]
-        public int ProductAmount { get; set; }
-
-        public OrderLine(int id, Product productInOrder, int productAmount, Order inOrder)
-        {
-            Id = id;
-            ProductInOrder = productInOrder;
-            ProductId = ProductInOrder.Id;
-            ProductAmount = productAmount;
-            InOrder = inOrder;
-            OrderId = inOrder.Id;
-
-        }
+        public int ProductAmount { get; set; }        
+        
     }
 }

@@ -16,13 +16,5 @@ namespace Paternoster.Models
 
         public int ProductId { get; set; }
 
-        public ProductPart(int id, ProductPart part, Product product)
-        {
-            Id = id;
-            Part = part;
-            PartId = Part.Id;
-            Product = product;
-            ProductId = product.Id;
-        }
     }
 }

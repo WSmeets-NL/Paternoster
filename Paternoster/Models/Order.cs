@@ -11,10 +11,5 @@ namespace Paternoster.Models
 
         public List<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 
-        public Order(int id, string orderCode)
-        {
-            Id = id;
-            OrderCode = orderCode;
-        }
     }
 }

@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Paternoster.DAL;
+
 namespace Paternoster
 {
     public class Program
@@ -9,7 +12,19 @@ namespace Paternoster
             // Add services to the container.
             builder.Services.AddRazorPages();
 
+            builder.Services.AddDbContext<PaternosterDbContext>(options =>
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
