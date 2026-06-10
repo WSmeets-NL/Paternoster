@@ -12,12 +12,7 @@ namespace Paternoster.Models
 
         public List<OrderLine> Orders { get; set; } = new List<OrderLine>();
 
-        public List<ProductPart> PartsUsed { get; set; } = new List<ProductPart>();
+        public List<ProductPart> ProductParts { get; set; } = new List<ProductPart>();
 
-        public Product(int id, string productCode) 
-        {
-            Id = id;
-            ProductCode = productCode;
-        }
     }
 }

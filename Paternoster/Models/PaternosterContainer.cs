@@ -9,27 +9,17 @@ namespace Paternoster.Models
         [Required]
         public string ContainerCode { get; set; }
 
+        public Part? Part { get; set; }
+
+        public int? PartId { get; set; }
+
         [Required]
-        public Part ContainedPart { get; set; }
+        public Paternoster Paternoster { get; set; }
 
-        public int ContainedPartId { get; set; }
-
-        [Required]
-        public Paternoster AssociatedPaternoster { get; set; }
-
-        public int AssociatedPaternosterId { get; set; }
+        public int PaternosterId { get; set; }
 
         public int PartAmount { get; set; }
 
-        public PaternosterContainer(int id, string containerCode, Part containedPart, Paternoster associatedPaternoster)
-        {
-            Id = id;
-            ContainerCode = containerCode;
-            ContainedPart = containedPart;
-            ContainedPartId = containedPart.Id;
-            AssociatedPaternoster = associatedPaternoster;
-            AssociatedPaternosterId = associatedPaternoster.Id;
-        }
 
     }
 

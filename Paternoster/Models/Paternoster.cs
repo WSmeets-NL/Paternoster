@@ -10,7 +10,7 @@ namespace Paternoster.Models
         public string PaternosterCode { get; set; }
 
         [Required]
-        public PaternosterSystem AssociatedPaternosterSystem { get; set; }
+        public PaternosterSystem PaternosterSystem { get; set; }
         [Required]
         public int NumberOfContainers { get; set;  }
 
@@ -21,14 +21,6 @@ namespace Paternoster.Models
         public List<PaternosterContainer> Containers { get; set; } = new List<PaternosterContainer>();
 
         public string? Location { get; set; }
-
-        public Paternoster(int id, string paternosterCode, PaternosterSystem associatedPaternosterSystem)
-        {
-            Id = id;
-            PaternosterCode = paternosterCode;
-            AssociatedPaternosterSystem = associatedPaternosterSystem;
-            PaternosterSystemId = associatedPaternosterSystem.Id;
-        }
 
         public void AddContainer(PaternosterContainer container)
             {
