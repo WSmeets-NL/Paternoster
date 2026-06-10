@@ -11,7 +11,7 @@ namespace Paternoster.Models
 
         public Part? Part { get; set; }
 
-        public int PartId { get; set; }
+        public int? PartId { get; set; }
 
         [Required]
         public Paternoster Paternoster { get; set; }

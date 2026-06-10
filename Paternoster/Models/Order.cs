@@ -11,5 +11,12 @@ namespace Paternoster.Models
 
         public List<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
 
+        [Required]
+        public Customer Customer { get; set; }
+
+        public Order()
+        {
+
+        }
     }
 }

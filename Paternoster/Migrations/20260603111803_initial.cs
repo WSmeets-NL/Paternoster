@@ -106,7 +106,7 @@ namespace Paternoster.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ContainerCode = table.Column<string>(type: "TEXT", nullable: false),
-                    PartId = table.Column<int>(type: "INTEGER", nullable: false),
+                    PartId = table.Column<int>(type: "INTEGER", nullable: true),
                     PaternosterId = table.Column<int>(type: "INTEGER", nullable: false),
                     PartAmount = table.Column<int>(type: "INTEGER", nullable: false)
                 },

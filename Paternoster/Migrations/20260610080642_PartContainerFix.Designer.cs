@@ -10,8 +10,8 @@ using Paternoster.DAL;
 namespace Paternoster.Migrations
 {
     [DbContext(typeof(PaternosterDbContext))]
-    [Migration("20260603110400_initial")]
-    partial class initial
+    [Migration("20260610080642_PartContainerFix")]
+    partial class PartContainerFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,9 +73,6 @@ namespace Paternoster.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContainerId")
-                        .IsUnique();
-
                     b.ToTable("Parts");
                 });
 
@@ -121,13 +118,16 @@ namespace Paternoster.Migrations
                     b.Property<int>("PartAmount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("PartId")
+                    b.Property<int?>("PartId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("PaternosterId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PartId")
+                        .IsUnique();
 
                     b.HasIndex("PaternosterId");
 
@@ -204,17 +204,6 @@ namespace Paternoster.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Paternoster.Models.Part", b =>
-                {
-                    b.HasOne("Paternoster.Models.PaternosterContainer", "Container")
-                        .WithOne("Part")
-                        .HasForeignKey("Paternoster.Models.Part", "ContainerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Container");
-                });
-
             modelBuilder.Entity("Paternoster.Models.Paternoster", b =>
                 {
                     b.HasOne("Paternoster.Models.PaternosterSystem", "PaternosterSystem")
@@ -228,11 +217,17 @@ namespace Paternoster.Migrations
 
             modelBuilder.Entity("Paternoster.Models.PaternosterContainer", b =>
                 {
+                    b.HasOne("Paternoster.Models.Part", "Part")
+                        .WithOne("Container")
+                        .HasForeignKey("Paternoster.Models.PaternosterContainer", "PartId");
+
                     b.HasOne("Paternoster.Models.Paternoster", "Paternoster")
                         .WithMany("Containers")
                         .HasForeignKey("PaternosterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Part");
 
                     b.Navigation("Paternoster");
                 });
@@ -263,17 +258,15 @@ namespace Paternoster.Migrations
 
             modelBuilder.Entity("Paternoster.Models.Part", b =>
                 {
+                    b.Navigation("Container")
+                        .IsRequired();
+
                     b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Paternoster.Models.Paternoster", b =>
                 {
                     b.Navigation("Containers");
-                });
-
-            modelBuilder.Entity("Paternoster.Models.PaternosterContainer", b =>
-                {
-                    b.Navigation("Part");
                 });
 
             modelBuilder.Entity("Paternoster.Models.PaternosterSystem", b =>
