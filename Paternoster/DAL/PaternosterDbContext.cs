@@ -68,6 +68,10 @@ namespace Paternoster.DAL
                 .HasOne(ol => ol.Order)
                 .WithMany(o => o.OrderLines)
                 .HasForeignKey(ol => ol.OrderId);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.Customer)
+                .WithMany(c => c.Orders)
         }
     }
 }
