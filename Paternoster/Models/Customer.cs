@@ -15,6 +15,8 @@ namespace Paternoster.Models
         [Required]
         public string Password { get; set; }
 
+        public List<Order> Order { get; set; } = new List<Order>();
+
         public Customer()
         {
 
