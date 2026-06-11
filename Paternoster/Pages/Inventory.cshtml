@@ -1,0 +1,43 @@
+﻿@page
+@using Paternoster.Models
+@model InventoryModel
+@{
+    ViewData["Title"] = "My Inventory";
+}
+
+<h1 class="display-4">Huidige voorraad</h1>
+<p>
+    <form method="get">
+        Filter op paternoster:
+        <input type="text" />
+        <input class="btn btn-primary" value="&#xF3E1;" type="submit" />
+    </form>
+</p>
+
+<div class="container">
+    <table>
+        <thead>
+            <tr>
+                <th>PaternosterSysteem</th>
+                <th>Paternosternaam</th>
+                <th>ContainerNaam</th>
+                <th>Onderdeel</th>
+                <th>Huidige voorraad</th>
+            </tr>
+        </thead>
+    
+    @if (Model.Parts != null)
+    {
+        @foreach(Part part in Model.Parts)
+        {
+            <tr>
+                <td>@part.Container.Paternoster.PaternosterSystem.Name</td>
+                <td> @part.Container.Paternoster.PaternosterCode</td>
+                <td> @part.Container.ContainerCode</td>
+                <td>@part.PartCode</td>
+                <td>@part.Container.PartAmount</td>
+            </tr>
+        }
+    }
+    </table>
+</div>
