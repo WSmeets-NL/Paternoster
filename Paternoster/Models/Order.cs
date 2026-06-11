@@ -14,6 +14,8 @@ namespace Paternoster.Models
         [Required]
         public Customer Customer { get; set; }
 
+        public int CustomerId { get; set; }
+
         public Order()
         {
 

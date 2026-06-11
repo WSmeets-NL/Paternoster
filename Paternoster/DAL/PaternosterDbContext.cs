@@ -44,11 +44,6 @@ namespace Paternoster.DAL
                 .HasForeignKey<Part>(p => p.ContainerId)
                 .IsRequired();
 
-            modelBuilder.Entity<PaternosterContainer>()
-                .HasOne(c => c.Part)
-                .WithOne(p => p.Container)
-                .HasForeignKey<PaternosterContainer>(c => c.PartId);
-
             modelBuilder.Entity<ProductPart>()
                 .HasOne(pp => pp.Part)
                 .WithMany(p => p.Products)
@@ -72,6 +67,7 @@ namespace Paternoster.DAL
             modelBuilder.Entity<Order>()
                 .HasOne(o => o.Customer)
                 .WithMany(c => c.Orders)
+                .HasForeignKey(o => o.CustomerId);
         }
     }
 }
