@@ -9,6 +9,8 @@ namespace Paternoster.Models
         public int Id { get; set; }
         [Required]
         public string ProductCode { get; set; }
+        [Required]
+        public string ProductName { get; set; }
 
         public List<OrderLine> Orders { get; set; } = new List<OrderLine>();
 

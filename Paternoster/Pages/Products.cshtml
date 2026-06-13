@@ -4,5 +4,36 @@
 @{
     ViewData["Title"] = "Producten";
 }
+<h1>Zoek een product:</h1>
+<div class="container">
+    <form method="get">
+        <p>Zoek een onderdeel:</p>
+        <label for="Name"> Naam van het onderdeel:</label>
+        <input name="Name" />
+        <input type="submit" value="&#x1F50D;" />
+    </form>
+</div>
 
+<div class="container">
+    @if (Model.Products == null)
+    {
+        <h2>Sorry, maar ik heb geen roducten gevonden. Probeer een nieuwe zoekopdracht.</h2>
+    }
+    else
+    {
+        foreach (Product product in Model.Products)
+        {
+            <div class="container">
+                <h3>Naam:</h3>
+                <p>@part.Name</p>
+                <h3>Code:</h3>
+                <p>@part.PartCode</p>
+                <h3>Paternoster : Container</h3>
+                <p>@part.Container.Paternoster.PaternosterCode : @part.Container.ContainerCode</p>
+                <h3>Huidige voorraad</h3>
+                <p>@part.Container.PartAmount stuks</p>
+            </div>
+        }
+    }
+</div>
 
