@@ -16,6 +16,8 @@ namespace Paternoster.Models
 
         public int CustomerId { get; set; }
 
+        public bool IsFinished { get; set; } = false;
+
         public Order()
         {
 
