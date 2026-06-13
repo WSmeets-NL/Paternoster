@@ -9,6 +9,10 @@ namespace Paternoster.Models
         public int Id { get; set; }
 
         [Required]
+
+        public string Name { get; set; }
+
+        [Required]
         public string PartCode { get; set; }
 
         [Required]

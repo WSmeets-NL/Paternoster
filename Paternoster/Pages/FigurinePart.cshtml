@@ -1,4 +1,39 @@
 ﻿@page
-@model Paternoster.Pages.FigurinePartModel
+@using Paternoster.Models
+@model FigurinePartModel
 @{
+    ViewData["Title"] = "FigurinePart";
 }
+<h1>Zoek een onderdeel:</h1>
+<div class="container">
+    <form method="get">
+        <p>Zoek een onderdeel:</p>
+        <label for="Name"> Naam van het onderdeel:</label>
+        <input name="Name" />
+        <input type="submit" value="&#x1F50D;" />
+    </form>
+</div>
+
+<div class="container">
+    @if(Model.Parts == null)
+    {
+        <h2>Sorry, maar ik heb geen onderdelen gevonden. Probeer een nieuwe zoekopdracht.</h2>
+    }
+    else
+    {
+        foreach(Part part in Model.Parts)
+        {
+            <div class="container">
+                <h3>Naam:</h3>
+                <p>@part.Name</p>
+                <h3>Code:</h3>
+                <p>@part.PartCode</p>
+                <h3>Paternoster : Container</h3>
+                <p>@part.Container.Paternoster.PaternosterCode : @part.Container.ContainerCode</p>
+                <h3>Huidige voorraad</h3>
+                <p>@part.Container.PartAmount stuks</p>
+            </div>
+        }
+    }
+</div>
+

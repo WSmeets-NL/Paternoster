@@ -6,3 +6,20 @@
 }
 
 <h1>Alle Orders</h1>
+<div class="container">
+    <form>
+        <select name="orderedBy" default="">
+            <option value="">Sorterer Orders op:</option>
+            <option value="customer">Klantnaam</option>
+            <option value="orderNumber">Ordernummer</option>
+            <option value="OrderLines">Aantal regels</option>
+        </select>
+
+        <select name="inverted" default="false">
+            <option value="">Standaard volgorde</option>
+            <option value="true">Omgekeerde volgorde</option>
+        </select>
+
+        <input class="btn btn-primary" value="sorteer" type="submit" />
+    </form>
+</div>
