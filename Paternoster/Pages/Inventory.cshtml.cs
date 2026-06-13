@@ -35,7 +35,7 @@ namespace Paternoster.Pages
 
             catch (Exception ex)
             {
-                Console.WriteLine("Sorry, maar er is iets misgeegaan.");
+                Console.WriteLine("Sorry, maar er is iets misgegaan.");
                 return Parts = new List<Part>();
             }
         }
