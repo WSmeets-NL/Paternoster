@@ -11,7 +11,13 @@ namespace Paternoster.Pages
         private readonly PaternosterDbContext _context;
 
         public IEnumerable<Part> Parts { get; set; }
-        public IEnumerable<Part> OnGet(string? name)
+
+        public FigurinePartModel(PaternosterDbContext context)
+        {
+            _context = context;
+        }
+
+        public async void OnGet(string? name)
         {
             try
             {
@@ -23,19 +29,16 @@ namespace Paternoster.Pages
                 {
                     Parts = _context.Parts.ToList();
                 }
-                return Parts;
 
             }
             catch (SqliteException ex)
             {
                 Console.WriteLine("Sorry, maar ik krijg geen verbinding met de database.");
-                return Parts = new List<Part>();
             }
 
             catch (Exception ex)
             {
                 Console.WriteLine("Sorry, maar er is iets misgegaan.");
-                return Parts = new List<Part>();
             }
         }
     }

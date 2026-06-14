@@ -13,6 +13,10 @@ namespace Paternoster.Pages
 
         public IEnumerable<Product> Products { get; set; } = new List<Product>();
 
+        public ProductsModel(PaternosterDbContext context)
+        {
+            _context = context;
+        }
         public async void OnGetAsync(string? name)
         {
             try
