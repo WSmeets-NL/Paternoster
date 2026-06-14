@@ -10,11 +10,13 @@ namespace Paternoster.Models
         [Required]
         public string ProductCode { get; set; }
         [Required]
-        public string ProductName { get; set; }
+        public string Name { get; set; }
 
         public List<OrderLine> Orders { get; set; } = new List<OrderLine>();
 
         public List<ProductPart> ProductParts { get; set; } = new List<ProductPart>();
+
+        public string? ImageReference { get; set; }
 
     }
 }

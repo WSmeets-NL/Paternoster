@@ -25,13 +25,16 @@
         {
             <div class="container">
                 <h3>Naam:</h3>
-                <p>@part.Name</p>
+                <p>@product.Name</p>
                 <h3>Code:</h3>
-                <p>@part.PartCode</p>
-                <h3>Paternoster : Container</h3>
-                <p>@part.Container.Paternoster.PaternosterCode : @part.Container.ContainerCode</p>
-                <h3>Huidige voorraad</h3>
-                <p>@part.Container.PartAmount stuks</p>
+                <p>@product.ProductCode</p>
+                <h3>Onderdelen</h3>
+                <ul>
+                    @foreach(ProductPart part in product.ProductParts)
+                    {
+                        <li>@part.PartAmount x @part.Part.Name</li>
+                    }
+                </ul>
             </div>
         }
     }

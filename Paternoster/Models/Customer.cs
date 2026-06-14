@@ -12,8 +12,6 @@ namespace Paternoster.Models
         public string Address { get; set; }
         [Required]
         public string ZipCode { get; set; }
-        [Required]
-        public string Password { get; set; }
 
         public List<Order> Orders { get; set; } = new List<Order>();
 

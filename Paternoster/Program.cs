@@ -10,10 +10,11 @@ namespace Paternoster
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorPages();
 
             builder.Services.AddDbContext<PaternosterDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
 

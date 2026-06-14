@@ -16,5 +16,7 @@ namespace Paternoster.Models
 
         public int ProductId { get; set; }
 
+        public int PartAmount { get; set; }
+
     }
 }

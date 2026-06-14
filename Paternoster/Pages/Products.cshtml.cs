@@ -11,14 +11,14 @@ namespace Paternoster.Pages
     {
         private readonly PaternosterDbContext _context;
 
-        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<Product> Products { get; set; } = new List<Product>();
         public IEnumerable<Product> OnGet(string? name)
         {
             try
             {
                 if (name != null)
                 {
-                    Products = _context.Products.ToList().Where(p => p.ProductName.Contains(name, StringComparison.OrdinalIgnoreCase));
+                    Products = _context.Products.ToList().Where(p => p.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
                 }
                 else
                 {
