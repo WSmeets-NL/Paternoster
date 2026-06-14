@@ -28,16 +28,26 @@
     
     @if (Model.Parts != null)
     {
-        @foreach(Part part in Model.Parts)
+        @foreach (Part part in Model.Parts)
         {
             <tr>
                 <td>@part.Container.Paternoster.PaternosterSystem.Name</td>
-                <td> @part.Container.Paternoster.PaternosterCode</td>
-                <td> @part.Container.ContainerCode</td>
+                <td>@part.Container.Paternoster.PaternosterCode</td>
+                <td>@part.Container.ContainerCode</td>
                 <td>@part.PartCode</td>
                 <td>@part.Container.PartAmount</td>
             </tr>
+            }
         }
-    }
+    else
+        {
+            <tr>
+                <td>Huh?</td>
+                <td>Heb</td>
+                <td>ik</td>
+                <td>geen</td>
+                <td>voorraad?</td>
+            </tr>
+        }
     </table>
 </div>

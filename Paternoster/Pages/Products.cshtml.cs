@@ -12,7 +12,8 @@ namespace Paternoster.Pages
         private readonly PaternosterDbContext _context;
 
         public IEnumerable<Product> Products { get; set; } = new List<Product>();
-        public IEnumerable<Product> OnGet(string? name)
+
+        public async void OnGetAsync(string? name)
         {
             try
             {
@@ -24,19 +25,16 @@ namespace Paternoster.Pages
                 {
                     Products = _context.Products.ToList();
                 }
-                return Products;
 
             }
             catch (SqliteException ex)
             {
                 Console.WriteLine("Sorry, maar ik krijg geen verbinding met de database.");
-                return Products = new List<Product>();
             }
             
             catch (Exception ex)
             {
                 Console.WriteLine("Sorry, maar er is iets misgegaan.");
-                return Products = new List<Product>();
             }
         }
     }
