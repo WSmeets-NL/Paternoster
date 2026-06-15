@@ -10,7 +10,7 @@ namespace Paternoster.DAL
 
         public DbSet<Models.Paternoster> Paternosters { get; set; }
 
-        public DbSet<PaternosterContainer> Containers { get; set; }
+        public DbSet<PaternosterContainer> PaternosterContainers { get; set; }
 
         public DbSet<Part> Parts { get; set; }
 

@@ -27,7 +27,7 @@ namespace Paternoster.Pages
                 if (paternosterId != null)
                 {
                     Parts = _context.Parts.ToList().Where(p => p.Container.PaternosterId == paternosterId);
-                    Containers = _context.Containers.ToList().Where(c => c.PaternosterId == paternosterId);
+                    Containers = _context.PaternosterContainers.ToList().Where(c => c.PaternosterId == paternosterId);
                     Paternosters = _context.Paternosters.ToList().Where(p => p.Id == paternosterId);
 
                 }
@@ -35,7 +35,7 @@ namespace Paternoster.Pages
                 else
                 {
                    Parts =  _context.Parts.ToList();
-                   Containers = _context.Containers.ToList();
+                   Containers = _context.PaternosterContainers.ToList();
                    Paternosters = _context.Paternosters.ToList();
                 }
 
