@@ -12,6 +12,10 @@ namespace Paternoster.Pages
 
         public IEnumerable<Part> Parts { get; set; }
 
+        public List<PaternosterContainer> Containers { get; set; } = new List<PaternosterContainer>();
+
+        public List<Models.Paternoster> Paternosters { get; set; } = new List<Models.Paternoster>();
+
         public FigurinePartModel(PaternosterDbContext context)
         {
             _context = context;
@@ -29,6 +33,18 @@ namespace Paternoster.Pages
                 {
                     Parts = _context.Parts.ToList();
                 }
+
+            foreach(Part part in Parts)
+                {
+                    Containers.AddRange(_context.PaternosterContainers.ToList().Where(pc => pc.Id == part.ContainerId));
+                }
+
+            foreach(PaternosterContainer paternosterContainer in Containers)
+                {
+                    Paternosters.AddRange((_context.Paternosters.ToList().Where(p => p.Id == paternosterContainer.PaternosterId)));
+                }
+
+                Paternosters.Distinct();
 
             }
             catch (SqliteException ex)

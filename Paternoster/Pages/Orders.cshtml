@@ -9,9 +9,9 @@
 <div class="container">
     <form>
         <select name="orderedBy" default="">
-            <option value="">Sorterer Orders op:</option>
-            <option value="customer">Klantnaam</option>
-            <option value="orderNumber">Ordernummer</option>
+            <option value="">Sorteer Orders op:</option>
+            <option value="Customer">Klantnaam</option>
+            <option value="OrderNumber">Ordernummer</option>
             <option value="OrderLines">Aantal regels</option>
         </select>
 
@@ -38,7 +38,7 @@
                     {
                         @if (orderLine.OrderId == order.Id)
                         {
-                            <p>Product: @orderLine.ProductAmount x @orderLine.Product.Name</p>
+                            <p>@orderLine.ProductAmount x @orderLine.Product.Name</p>
                         }
                     }
                 </li>

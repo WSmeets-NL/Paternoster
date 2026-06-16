@@ -47,11 +47,11 @@ namespace Paternoster.Pages
             
                 switch (orderedBy)
                 {
-                    case "customer":
+                    case "Customer":
                         Orders.OrderBy(o => o.Customer.Name);
                         break;
 
-                    case "orderNumber":
+                    case "OrderNumber":
                         Orders.OrderBy(o => o.OrderCode);
                         break;
 
