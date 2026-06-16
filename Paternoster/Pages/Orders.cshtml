@@ -31,12 +31,15 @@
             @foreach (Order order in Model.Orders)
             {
                 <li>
-                    <p>>Klant: @order.Customer.Name</p>
+                    <p>>Klant: @Model.Customers[order.CustomerId].Name</p>
                     <p>OrderNummer: @order.OrderCode</p>
                     <p>producten: </p>
-                    @foreach (OrderLine orderLine in order.OrderLines)
+                    @foreach (OrderLine orderLine in Model.OrderLines)
                     {
-                        <p>Product: @orderLine.ProductAmount x @orderLine.Product.Name</p>
+                        @if (orderLine.OrderId == order.Id)
+                        {
+                            <p>Product: @orderLine.ProductAmount x @orderLine.Product.Name</p>
+                        }
                     }
                 </li>
             }

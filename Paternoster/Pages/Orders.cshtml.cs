@@ -11,9 +11,13 @@ namespace Paternoster.Pages
     {
         private readonly PaternosterDbContext _context;
 
-        public IEnumerable<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; } = new List<Order>();
          
-        public IEnumerable<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
+        public List<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
+
+        public List<Customer> Customers { get; set; } = new List<Customer>();
+
+        public List<Product> Products { get; set; } = new List<Product>();
 
         public OrdersModel(PaternosterDbContext context)
         {
@@ -23,7 +27,24 @@ namespace Paternoster.Pages
         {
             try
             {
-                Orders = _context.Orders.ToList().Where(o => o.IsFinished == false);
+                Orders.AddRange(_context.Orders.ToList().Where(o => o.IsFinished == false));
+
+                foreach(Order order in Orders)
+                {
+                    var LinesInOrder = _context.OrderLines.ToList().Where(ol => ol.OrderId == order.Id);
+                    OrderLines.AddRange(LinesInOrder);
+
+                    Customers.AddRange(_context.Customers.ToList().Where(c => c.Id == order.CustomerId));
+                }
+
+                foreach(OrderLine orderline in OrderLines)
+                {
+                    Products.AddRange(_context.Products.ToList().Where(p => p.Id == orderline.ProductId));
+                }
+
+                Customers.Distinct();
+                Products.Distinct();
+            
                 switch (orderedBy)
                 {
                     case "customer":

@@ -22,6 +22,8 @@ namespace Paternoster.DAL
 
         public DbSet<Order> Orders { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+             
         public PaternosterDbContext(DbContextOptions<PaternosterDbContext> options) : base(options)
         {
         }
