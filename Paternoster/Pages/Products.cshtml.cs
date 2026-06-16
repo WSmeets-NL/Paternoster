@@ -13,6 +13,9 @@ namespace Paternoster.Pages
 
         public IEnumerable<Product> Products { get; set; } 
 
+        public List<ProductPart> ProductParts { get; set; } = new List<ProductPart>();
+
+        public List<Part> Parts { get; set; } = new List<Part>();
         public ProductsModel(PaternosterDbContext context)
         {
             _context = context;
@@ -28,6 +31,16 @@ namespace Paternoster.Pages
                 else
                 {
                     Products = _context.Products.ToList();
+                }
+
+                foreach(Product product in Products) 
+                {
+                    ProductParts.AddRange(_context.ProductParts.ToList().Where(pp => pp.ProductId == product.Id));
+                }
+
+                foreach(ProductPart productPart in ProductParts)
+                {
+                    Parts.AddRange(_context.Parts.ToList().Where(p => p.Id == productPart.PartId));
                 }
 
             }
