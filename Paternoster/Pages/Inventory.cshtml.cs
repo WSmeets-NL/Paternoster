@@ -41,7 +41,7 @@ namespace Paternoster.Pages
 
                 if (partName != null)
                 {
-                    Parts = Parts.Where(p => p.Name.Contains(partName));
+                    Parts = Parts.Where(p => p.Name.Contains(partName, StringComparison.OrdinalIgnoreCase));
 
                 }
 

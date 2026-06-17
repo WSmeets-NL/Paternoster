@@ -23,11 +23,18 @@ namespace Paternoster.Pages
         {
             _context = context;
         }   
-        public async void OnGetAsync(string? orderedBy, bool? inverted)
+        public async void OnGetAsync(string? orderedBy, bool? inverted, int? customerId)
         {
             try
             {
-                Orders.AddRange(_context.Orders.ToList().Where(o => o.IsFinished == false));
+                if (customerId != null)
+                {
+                    Orders.AddRange(_context.Orders.ToList().Where(o => o.CustomerId == customerId && o.IsFinished == false));
+                }
+                else 
+                {
+                    Orders.AddRange(_context.Orders.ToList().Where(o => o.IsFinished == false));
+                }
 
                 foreach(Order order in Orders)
                 {
@@ -42,21 +49,21 @@ namespace Paternoster.Pages
                     Products.AddRange(_context.Products.ToList().Where(p => p.Id == orderLine.ProductId));
                 }
 
-                Customers.Distinct();
-                Products.Distinct();
+                Customers = Customers.DistinctBy(c => c.Name).ToList();
+                Products = Products.DistinctBy(p => p.Name).ToList();
             
                 switch (orderedBy)
                 {
                     case "Customer":
-                        Orders.OrderBy(o => o.Customer.Name);
+                        Orders = Orders.OrderBy(o => o.Customer.Name).ToList();
                         break;
 
                     case "OrderNumber":
-                        Orders.OrderBy(o => o.OrderCode);
+                        Orders = Orders.OrderBy(o => o.OrderCode).ToList();
                         break;
 
                     case "OrderLines":
-                        Orders.OrderBy(o => o.OrderLines.Count);
+                        Orders = Orders.OrderBy(o => o.OrderLines.Count).ToList();
                         break;
                 }
                
