@@ -9,8 +9,12 @@
 <p>
     <form method="get">
         Filter op paternoster:
-        <input type="text" />
-        <input class="btn btn-primary" value="&#xF3E1;" type="submit" />
+        <select name="paternosterId" default="" />
+        @foreach(Paternoster paternoster in Model.Paternosters)
+            {
+                <option value="@paternoster.Id">@paternoster.PaternosterCode</option>
+            }
+            <input class="btn btn-primary" value="&#xF3E1;" type="submit" />
     </form>
 </p>
 
