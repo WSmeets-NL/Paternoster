@@ -7,11 +7,20 @@
 <h1>Zoek een onderdeel:</h1>
 <div class="container">
     <form method="get">
-        <p>Zoek een onderdeel:</p>
-        <label for="Name"> Naam van het onderdeel:</label>
+
+        <label for="name"> Naam van het onderdeel:</label>
         <input name="Name" />
+        <label for="productId">Wordt gebruikt in:</label>
+        <select name="productId">
+            <option value="">-----</option>
+            @foreach(Product product in Model.Products)
+                {
+                    <option value="@product.Id">@product.Name</option>
+                }
+            </select>
         <input type="submit" value="&#x1F50D;" />
-    </form>
+
+     </form>
 </div>
 
 <div class="container">
@@ -24,13 +33,13 @@
         foreach(Part part in Model.Parts)
         {
             <div class="partcontainer">
-                <h3>Naam:</h3>
+                <h4>Naam:</h4>
                 <p>@part.Name</p>
-                <h3>Code:</h3>
+                <h4>Code:</h4>
                 <p>@part.PartCode</p>
-                <h3>Paternoster : Container</h3>
+                <h4>Paternoster : Container</h4>
                 <p>@part.Container.Paternoster.PaternosterCode : @part.Container.ContainerCode</p>
-                <h3>Huidige voorraad</h3>
+                <h4>Huidige voorraad</h4>
                 <p>@part.Container.PartAmount stuks</p>
             </div>
         }

@@ -11,43 +11,67 @@ namespace Paternoster.Pages
     {
         private readonly PaternosterDbContext _context;
 
-        public IEnumerable<Part> Parts { get; set; }
+        public List<Part> Parts { get; set; } = new List<Part>();
 
         public List<PaternosterContainer> Containers { get; set; } = new List<PaternosterContainer>();
 
         public List<Models.Paternoster> Paternosters { get; set; } = new List<Models.Paternoster>();
+
+        public List<ProductPart> ProductParts { get; set; } = new List<ProductPart>();
+         
+        public List<Product> Products { get; set; } = new List<Product>();
+
 
         public FigurinePartModel(PaternosterDbContext context)
         {
             _context = context;
         }
 
-        public async void OnGet(string? name)
+        public async void OnGet(string? name, int? productId)
         {
             try
             {
-                if(name != null)
+                if(productId != null)
                 {
-                    Parts = _context.Parts.ToList().Where(p => p.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
+                    ProductParts.AddRange(_context.ProductParts.ToList().Where(pp => pp.ProductId == productId));
                 }
                 else
                 {
-                    Parts = _context.Parts.ToList();
+                    ProductParts.AddRange(_context.ProductParts.ToList());
                 }
 
-            foreach(Part part in Parts)
+
+                foreach(ProductPart productPart in ProductParts)
                 {
-                    Containers.AddRange(_context.PaternosterContainers.ToList().Where(pc => pc.Id == part.ContainerId));
+
+                    Products.AddRange(_context.Products.ToList().Where(p => p.Id == productPart.ProductId).DistinctBy(p => p.Id));
+
+                    if (name != null)
+                    {
+                        Parts.AddRange(_context.Parts.ToList().Where(p => p.Id == productPart.PartId && p.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).DistinctBy(p => p.Id));
+                    }
+
+                    else
+                    {
+                        Parts.AddRange(_context.Parts.ToList().Where(p => p.Id == productPart.PartId).DistinctBy(p => p.Id));
+                    }
                 }
 
-            foreach(PaternosterContainer paternosterContainer in Containers)
+                foreach(Part part in Parts)
+                {
+                    Containers.AddRange(_context.PaternosterContainers.ToList().Where(c => c.PartId == part.Id));
+                }
+
+                foreach(PaternosterContainer paternosterContainer in Containers)
                 {
                     Paternosters.AddRange((_context.Paternosters.ToList().Where(p => p.Id == paternosterContainer.PaternosterId)));
                 }
 
-                Paternosters.Distinct();
+                Paternosters.DistinctBy(p => p.Id).ToList();
+                Products = Products.DistinctBy(p => p.Id).ToList();
 
             }
+            
             catch (SqliteException ex)
             {
                 Console.WriteLine("Sorry, maar ik krijg geen verbinding met de database.");
