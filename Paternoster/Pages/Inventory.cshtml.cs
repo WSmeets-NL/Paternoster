@@ -19,7 +19,7 @@ namespace Paternoster.Pages
             _context = context;
         }
 
-        public async void OnGet(int? paternosterId)
+        public async void OnGet(int? paternosterId, string? partName, string? orderByAmount)
         {
             try
             {
@@ -34,9 +34,20 @@ namespace Paternoster.Pages
 
                 else
                 {
-                   Parts =  _context.Parts.ToList();
-                   Containers = _context.PaternosterContainers.ToList();
-                   Paternosters = _context.Paternosters.ToList();
+                    Parts = _context.Parts.ToList();
+                    Containers = _context.PaternosterContainers.ToList();
+                    Paternosters = _context.Paternosters.ToList();
+                }
+
+                if (partName != null)
+                {
+                    Parts = Parts.Where(p => p.Name.Contains(partName));
+
+                }
+
+                if (orderByAmount == "on")
+                {
+                    Parts = Parts.OrderBy(p => p.Container.PartAmount);
                 }
 
             }
