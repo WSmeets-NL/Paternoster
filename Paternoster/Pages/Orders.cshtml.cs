@@ -37,9 +37,9 @@ namespace Paternoster.Pages
                     Customers.AddRange(_context.Customers.ToList().Where(c => c.Id == order.CustomerId));
                 }
 
-                foreach(OrderLine orderline in OrderLines)
+                foreach(OrderLine orderLine in OrderLines)
                 {
-                    Products.AddRange(_context.Products.ToList().Where(p => p.Id == orderline.ProductId));
+                    Products.AddRange(_context.Products.ToList().Where(p => p.Id == orderLine.ProductId));
                 }
 
                 Customers.Distinct();
@@ -55,7 +55,7 @@ namespace Paternoster.Pages
                         Orders.OrderBy(o => o.OrderCode);
                         break;
 
-                    case "NumberOfLines":
+                    case "OrderLines":
                         Orders.OrderBy(o => o.OrderLines.Count);
                         break;
                 }

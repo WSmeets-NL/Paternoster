@@ -31,7 +31,8 @@
             @foreach (Order order in Model.Orders)
             {
                 <li>
-                    <p>>Klant: @Model.Customers[order.CustomerId].Name</p>
+                    <div class="ordercontainer">
+                    <p>Klant: @Model.Customers[order.CustomerId].Name</p>
                     <p>OrderNummer: @order.OrderCode</p>
                     <p>producten: </p>
                     @foreach (OrderLine orderLine in Model.OrderLines)
@@ -41,6 +42,7 @@
                             <p>@orderLine.ProductAmount x @orderLine.Product.Name</p>
                         }
                     }
+                    </div>
                 </li>
             }
         </ul>
