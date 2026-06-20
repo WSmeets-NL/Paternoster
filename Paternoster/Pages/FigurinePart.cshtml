@@ -24,13 +24,9 @@
 </div>
 
 <div class="container">
-    @if(Model.Parts == null)
+    @if(Model.Parts != null)
     {
-        <h2>Sorry, maar ik heb geen onderdelen gevonden. Probeer een nieuwe zoekopdracht.</h2>
-    }
-    else
-    {
-        foreach(Part part in Model.Parts)
+        foreach (Part part in Model.Parts)
         {
             <div class="partcontainer">
                 <h4>Naam:</h4>
@@ -43,6 +39,10 @@
                 <p>@part.Container.PartAmount stuks</p>
             </div>
         }
+    }
+    else
+    {
+        <h2>Sorry, maar ik heb geen relevante onderdelen gevonden.</h2>
     }
 </div>
 

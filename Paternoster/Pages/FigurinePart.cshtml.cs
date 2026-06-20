@@ -48,7 +48,7 @@ namespace Paternoster.Pages
 
                     if (name != null)
                     {
-                        Parts.AddRange(_context.Parts.ToList().Where(p => p.Id == productPart.PartId && p.Name.Contains(name, StringComparison.OrdinalIgnoreCase)).DistinctBy(p => p.Id));
+                        Parts.AddRange(_context.Parts.ToList().Where(p => p.Id == productPart.PartId && p.Name.Contains(name, StringComparison.OrdinalIgnoreCase)));
                     }
 
                     else
@@ -69,6 +69,7 @@ namespace Paternoster.Pages
 
                 Paternosters.DistinctBy(p => p.Id).ToList();
                 Products = Products.DistinctBy(p => p.Id).ToList();
+                Parts = Parts.DistinctBy(p => p.Id).ToList();
 
             }
             

@@ -7,17 +7,30 @@
 <h1>Zoek een product:</h1>
 <div class="container">
     <form method="get">
-        <p>Zoek een Product:</p>
         <label for="Name"> Naam van het Product:</label>
         <input name="Name" />
         <input type="submit" value="&#x1F50D;" />
+
+        <label for="orderByName">Sorteer op alfabetische volgorde.</label>
+        <input type="checkbox" name="orderByName" id="true" />
+
+        <label for="affiliation">Filter op groep:</label>
+        <select name="affiliation" default ="">
+            <option value="">-----</option>
+            @foreach(string affiliation in Model.Affiliations)
+                {
+                    <option value="@affiliation">@affiliation</option>
+                }
+            </select>
+
+        <input class="btn btn-primary" type="submit" value="zoek" />
     </form>
 </div>
 
 <div class="container">
     @if (Model.Products == null)
     {
-        <h2>Sorry, maar ik heb geen roducten gevonden. Probeer een nieuwe zoekopdracht.</h2>
+        <h2>Sorry, maar ik heb geen producten gevonden. Probeer een nieuwe zoekopdracht.</h2>
     }
     else
     {
