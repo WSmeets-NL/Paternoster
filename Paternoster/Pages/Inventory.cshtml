@@ -6,38 +6,61 @@
 }
 
 <h1 class="display-4">Huidige voorraad</h1>
-<p>
+<fieldset>
     <form method="get">
         Filter op paternoster:
-        <input type="text" />
-        <input class="btn btn-primary" value="&#xF3E1;" type="submit" />
+        <select name="paternosterId" default="">
+        <option value="">Selecteer Paternoster</option>
+        @foreach(Paternoster paternoster in Model.Paternosters)
+            {
+                <option value="@paternoster.Id">@paternoster.PaternosterCode</option>
+            }
+        </select>
+        <label for="partName" >Naam van het onderdeel:</label>
+        <input name="partName"/>
+        <label for="orderByAmount">Sorteer op huidige voorraad</label>
+        <input type="checkbox" name="orderByAmount" id="true" />
+        <input class="btn btn-primary" value="&#x1F50D;" type="submit" />
     </form>
-</p>
+</fieldset>
 
 <div class="container">
     <table>
         <thead>
             <tr>
-                <th>PaternosterSysteem</th>
-                <th>Paternosternaam</th>
-                <th>ContainerNaam</th>
-                <th>Onderdeel</th>
+                <th>Paternoster Systeem</th>
+                <th>Naam Paternoster</th>
+                <th>Locatie Paternoster</th>
+                <th>Code van de Container</th>
+                <th>Naam Onderdeel</th>
                 <th>Huidige voorraad</th>
             </tr>
         </thead>
     
     @if (Model.Parts != null)
     {
-        @foreach(Part part in Model.Parts)
+        @foreach (Part part in Model.Parts)
         {
             <tr>
                 <td>@part.Container.Paternoster.PaternosterSystem.Name</td>
-                <td> @part.Container.Paternoster.PaternosterCode</td>
-                <td> @part.Container.ContainerCode</td>
-                <td>@part.PartCode</td>
+                <td>@part.Container.Paternoster.PaternosterCode</td>
+                <td>@part.Container.Paternoster.Location</td>
+                <td>@part.Container.ContainerCode</td>
+                <td>@part.Name</td>
                 <td>@part.Container.PartAmount</td>
             </tr>
+            }
         }
-    }
+    else
+        {
+            <tr>
+                <td>Huh?</td>
+                <td>Waarom</td>
+                <td>Heb</td>
+                <td>ik</td>
+                <td>geen</td>
+                <td>voorraad?</td>
+            </tr>
+        }
     </table>
 </div>

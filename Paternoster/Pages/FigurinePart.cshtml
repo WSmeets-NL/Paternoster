@@ -1,0 +1,48 @@
+﻿@page
+@using Paternoster.Models
+@model FigurinePartModel
+@{
+    ViewData["Title"] = "FigurinePart";
+}
+<h1>Zoek een onderdeel:</h1>
+<div class="container">
+    <form method="get">
+
+        <label for="name"> Naam van het onderdeel:</label>
+        <input name="Name" />
+        <label for="productId">Wordt gebruikt in:</label>
+        <select name="productId">
+            <option value="">-----</option>
+            @foreach(Product product in Model.Products)
+                {
+                    <option value="@product.Id">@product.Name</option>
+                }
+            </select>
+        <input type="submit" value="&#x1F50D;" />
+
+     </form>
+</div>
+
+<div class="container">
+    @if(Model.Parts != null)
+    {
+        foreach (Part part in Model.Parts)
+        {
+            <div class="partcontainer">
+                <h4>Naam:</h4>
+                <p>@part.Name</p>
+                <h4>Code:</h4>
+                <p>@part.PartCode</p>
+                <h4>Paternoster : Container</h4>
+                <p>@part.Container.Paternoster.PaternosterCode : @part.Container.ContainerCode</p>
+                <h4>Huidige voorraad</h4>
+                <p>@part.Container.PartAmount stuks</p>
+            </div>
+        }
+    }
+    else
+    {
+        <h2>Sorry, maar ik heb geen relevante onderdelen gevonden.</h2>
+    }
+</div>
+

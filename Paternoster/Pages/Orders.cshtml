@@ -6,3 +6,58 @@
 }
 
 <h1>Alle Orders</h1>
+<div class="container">
+    <form>
+        <label for="orderedBy">Sorteren op:</label>
+        <select name="orderedBy" default="">
+            <option value="">-----</option>
+            <option value="Customer">Klantnaam</option>
+            <option value="OrderNumber">Ordernummer</option>
+            <option value="OrderLines">Aantal regels</option>
+        </select>
+        <label for="inverted">Volgorde:</label>
+        <select name="inverted" default="false">
+            <option value="">Standaard volgorde</option>
+            <option value="true">Omgekeerde volgorde</option>
+        </select>
+
+        <label for="customerId">Zoek op klantnaam:</label>
+        <select name="customerId" default="">
+            <option value="">-----</option>
+            @foreach(Customer customer in Model.Customers)
+            {
+                <option value="@customer.Id">@customer.Name</option>
+            }
+        </select>
+        <input class="btn btn-primary" value="sorteer" type="submit" />
+    </form>
+</div>
+
+<div class="container">
+    @if (Model.Orders != null)
+    {
+        <ul>
+            @foreach (Order order in Model.Orders)
+            {
+                <li>
+                    <div class="ordercontainer">
+                    <p>Klant: @order.Customer.Name</p>
+                    <p>OrderNummer: @order.OrderCode</p>
+                    <p>producten: </p>
+                    @foreach (OrderLine orderLine in Model.OrderLines)
+                    {
+                        @if (orderLine.OrderId == order.Id)
+                        {
+                            <p>@orderLine.ProductAmount x @orderLine.Product.Name</p>
+                        }
+                    }
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <h2>Lekker bezig jongens. Alle orders zijn weg.</h2>
+    }
+</div>

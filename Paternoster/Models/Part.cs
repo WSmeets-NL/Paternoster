@@ -9,6 +9,9 @@ namespace Paternoster.Models
         public int Id { get; set; }
 
         [Required]
+        public string Name { get; set; }
+
+        [Required]
         public string PartCode { get; set; }
 
         [Required]
@@ -17,6 +20,8 @@ namespace Paternoster.Models
         public int ContainerId { get; set; }
 
         public List<ProductPart> Products { get; set; } = new List<ProductPart>();
+
+        public string? ImageReference { get; set; }
 
     }
 }
