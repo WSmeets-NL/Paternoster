@@ -1,0 +1,67 @@
+@page
+@model CreatePaternosterModel;
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Paternoster</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Paternoster.PaternosterCode" class="control-label"></label>
+                <input asp-for="Paternoster.PaternosterCode" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Paternoster.PaternosterCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Paternoster.PaternosterSystem" class="control-label"></label>
+                <input asp-for="Paternoster.PaternosterSystem" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Paternoster.PaternosterSystem" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Paternoster.NumberOfContainers" class="control-label"></label>
+                <input asp-for="Paternoster.NumberOfContainers" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Paternoster.NumberOfContainers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paternoster.PaternosterSystemId" class="control-label"></label>
+                <input asp-for="Paternoster.PaternosterSystemId" class="form-control" />
+                <span asp-validation-for="Paternoster.PaternosterSystemId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paternoster.IsFull" class="control-label"></label>
+                <input asp-for="Paternoster.IsFull" class="form-check-input" />
+                <span asp-validation-for="Paternoster.IsFull" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paternoster.Containers" class="control-label"></label>
+                <input asp-for="Paternoster.Containers" class="form-control" />
+                <span asp-validation-for="Paternoster.Containers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Paternoster.Location" class="control-label"></label>
+                <input asp-for="Paternoster.Location" class="form-control" />
+                <span asp-validation-for="Paternoster.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

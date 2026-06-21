@@ -7,20 +7,16 @@ namespace Paternoster.Pages
 {
     public class CreateModel : PageModel
     {
-        private readonly PaternosterDbContext _context;
-
-        public string ItemToCreate { get; set; }
 
         public IEnumerable<string> PossibleItemsToCreate { get; } = ["paternostersysteem", "paternoster", "paternostercontainer", "onderdeel", "product", "order", "klant"];
-         
 
-        public List<Customer> Customers { get; set; } = new List<Customer>();
+        public CreateModel() { }
 
         public IActionResult OnGet(string? itemToCreate)
         {
             if (PossibleItemsToCreate.Contains(itemToCreate) != true)
             {
-                return RedirectToPage();
+                return Page();
             }
 
             else
@@ -29,14 +25,44 @@ namespace Paternoster.Pages
                 {
                     case "paternostersysteem":
                         {
-                           return RedirectToPage("./CreatePaternosterSystem");
+                           return RedirectToPage("./CreatePages/CreatePaternosterSystem");
                         }
 
                     case "paternoster":
                         {
-                            return RedirectToPage("./CreatePaternoster");
+                            return RedirectToPage("./CreatePages/CreatePaternoster");
                         }
+
+                    case "paternostercontainer":
+                        {
+                            return RedirectToPage("./CreatePages//CreatePaternosterContainer");
+                        }
+                    case "onderdeel":
+                        {
+                            return RedirectToPage("./CreatePages//CreatePart");
+                        }
+
+                    case "product":
+                        {
+                            return RedirectToPage("./CreatePages//CreateProduct");
+                        }
+
+                    case "order":
+                        {
+                            return RedirectToPage("./CreatePages//CreateOrder");
+                        }
+
+                    case "klant":
+                        {
+                            return RedirectToPage("./CreatePages//CreateCustomer");
+                        }
+                    default:
+                        {
+                            return Page();
+                        }
+
                 }
             }
-    }
-}}
+        }
+    }   
+}

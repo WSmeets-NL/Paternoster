@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Paternoster.Models;
 using Paternoster.DAL;
 
-namespace Paternoster.Pages.PaternosterSystemPages;
+namespace Paternoster.Pages.CreatePages;
 
-public class CreateModel : PageModel
+public class CreatePaternosterContainerModel : PageModel
 {
     private readonly PaternosterDbContext _context;
 
-    public CreateModel(PaternosterDbContext context)
+    public CreatePaternosterContainerModel(PaternosterDbContext context)
     {
         _context = context;
     }
@@ -21,7 +21,7 @@ public class CreateModel : PageModel
     }
 
     [BindProperty]
-    public PaternosterSystem PaternosterSystem { get; set; } = default!;
+    public PaternosterContainer PaternosterContainer { get; set; } = default!;
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
@@ -31,7 +31,7 @@ public class CreateModel : PageModel
             return Page();
         }
 
-        _context.PaternosterSystems.Add(PaternosterSystem);
+        _context.PaternosterContainers.Add(PaternosterContainer);
         await _context.SaveChangesAsync();
 
         return RedirectToPage("./Index");

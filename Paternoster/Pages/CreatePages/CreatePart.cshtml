@@ -1,0 +1,62 @@
+@page
+@model CreatePartModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Part</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Part.Name" class="control-label"></label>
+                <input asp-for="Part.Name" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Part.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Part.PartCode" class="control-label"></label>
+                <input asp-for="Part.PartCode" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Part.PartCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Part.Container" class="control-label"></label>
+                <input asp-for="Part.Container" class="form-control" aria-required="true"/>
+                <span asp-validation-for="Part.Container" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Part.ContainerId" class="control-label"></label>
+                <input asp-for="Part.ContainerId" class="form-control" />
+                <span asp-validation-for="Part.ContainerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Part.Products" class="control-label"></label>
+                <input asp-for="Part.Products" class="form-control" />
+                <span asp-validation-for="Part.Products" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Part.ImageReference" class="control-label"></label>
+                <input asp-for="Part.ImageReference" class="form-control" />
+                <span asp-validation-for="Part.ImageReference" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
