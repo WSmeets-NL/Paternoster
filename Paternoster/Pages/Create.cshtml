@@ -1,0 +1,71 @@
+﻿@page
+@model Paternoster.Pages.CreateModel
+@{
+    ViewData["Title"] = "Maak Nieuw Item";
+}
+
+@if(Model.ItemToCreate == null)
+{
+    <h1>Welkom in het creatiescherm.</h1>
+    <h2>Gelieve hieronder aan te geven wat je wil maken</h2>
+
+    <form method="get">
+        <label for="itemToCreate">Ik wil een nieuw:</label>
+        <select name="itemToCreate">
+            <option value="">-----</option>
+        @foreach(string item in Model.PossibleItemsToCreate)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+            <input class="btn btn-primary" value="enter" type="submit" />
+        </form>
+}
+
+@if (Model.ItemToCreate == "order")
+{
+    <h1>Nieuw Product</h1>
+    <h2>Vul heet onderstaande formulier in:</h2>
+
+    <div class="container">
+        <form method="post">
+            <label for="itemName">Naam van het onderdeel:</label>
+            <input type="text" />
+
+            <label for="itemCode">Artikelcode van het onderdeel:</label>
+            <input type="text" />
+
+            <label for="itemPaternoster">In welkee paternoster hoort dit onderdeel?</label>
+            <input type="text" placeholder="WH_TRS" pattern="[A-Z]{2}_[A-Z]{3}" />
+
+            <label for="itemLocation">In welke container hoort dit onderdeel?</label>
+            <input type="text" placeholder="WHT_RS_005" pattern="[A-Z]{2}_[A-Z]{3}_[0-9]{3}" />
+
+            <input class="btn btn-primary" value="order toevoegen" type="submit" />
+        </form>
+    </div>
+}
+
+@if (Model.ItemToCreate == "onderdeel")
+{
+    <h1>Nieuw Product</h1>
+    <h2>Vul heet onderstaande formulier in:</h2>
+
+    <div class="container">
+        <form method="post">
+            <label for="itemName">Naam van het onderdeel:</label>
+            <input type="text" />
+            
+            <label for="itemCode">Artikelcode van het onderdeel:</label>
+            <input type="text" />
+
+            <label for="itemPaternoster">In welkee paternoster hoort dit onderdeel?</label>
+            <input type="text" placeholder="WH_TRS" pattern="[A-Z]{2}_[A-Z]{3}"/>
+
+            <label for="itemLocation">In welke container hoort dit onderdeel?</label>
+            <input type="text" placeholder="WHT_RS_005" pattern="[A-Z]{2}_[A-Z]{3}_[0-9]{3}" />
+
+            <input class="btn btn-primary" value="onderdeel toevoegen" type="submit" />
+        </form>
+    </div>
+}
