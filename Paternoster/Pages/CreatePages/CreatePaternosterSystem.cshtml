@@ -6,9 +6,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>PaternosterSystem</h4>
+<h4>Nieuw PaternosterSysteem</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -20,20 +19,16 @@
                 <input asp-for="PaternosterSystem.Name" class="form-control" aria-required="true"/>
                 <span asp-validation-for="PaternosterSystem.Name" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="PaternosterSystem.Paternosters" class="control-label"></label>
-                <input asp-for="PaternosterSystem.Paternosters" class="form-control" />
-                <span asp-validation-for="PaternosterSystem.Paternosters" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Paternostersysteem aanmaken" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a class="btn btn-primary" asp-area="" asp-page="./Create">Terug naar Creatie-scherm</a>
 </div>
 
 @section Scripts {

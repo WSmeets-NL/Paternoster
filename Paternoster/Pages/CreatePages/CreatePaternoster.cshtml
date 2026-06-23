@@ -1,5 +1,6 @@
 @page
 @model CreatePaternosterModel;
+@using Paternoster.Models
 
 @{
     ViewData["Title"] = "Create";
@@ -7,7 +8,7 @@
 
 <h1>Create</h1>
 
-<h4>Paternoster</h4>
+<h4>Nieuwe Paternoster</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,51 +16,46 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Paternoster.PaternosterCode" class="control-label"></label>
-                <input asp-for="Paternoster.PaternosterCode" class="form-control" aria-required="true"/>
+                <label asp-for="Paternoster.PaternosterCode" class="control-label">PaternosterCode</label>
+                <input asp-for="Paternoster.PaternosterCode" class="form-control" aria-required="true" pattern="[A-Z]{2}_[A-Z]{3}"/>
                 <span asp-validation-for="Paternoster.PaternosterCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Paternoster.PaternosterSystem" class="control-label"></label>
-                <input asp-for="Paternoster.PaternosterSystem" class="form-control" aria-required="true"/>
+                <label asp-for="Paternoster.PaternosterSystem" class="control-label">Kies een Paternostersysteem</label>
+                <select asp-for="Paternoster.PaternosterSystem" class="form-control" aria-required="true">
+                    <option value="">---Selecteer Paternostersysteem---</option>
+                    @foreach(PaternosterSystem paternosterSystem in Model.PaternosterSystems)
+                    {
+                       <option value="@paternosterSystem.Id">@paternosterSystem.Name</option>
+                    }
+                </select>
                 <span asp-validation-for="Paternoster.PaternosterSystem" class="text-danger"></span>
+
+                <a class="btn btn-primary" asp-area="" asp-page="./CreatePaternosterSystem">Paternostersysteem Toevoegen</a>
             </div>
+
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Paternoster.NumberOfContainers" class="control-label"></label>
+                <label asp-for="Paternoster.NumberOfContainers" class="control-label">Hoeveel containers heeft deze paternoster?</label>
                 <input asp-for="Paternoster.NumberOfContainers" class="form-control" aria-required="true"/>
                 <span asp-validation-for="Paternoster.NumberOfContainers" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Paternoster.PaternosterSystemId" class="control-label"></label>
-                <input asp-for="Paternoster.PaternosterSystemId" class="form-control" />
-                <span asp-validation-for="Paternoster.PaternosterSystemId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Paternoster.IsFull" class="control-label"></label>
-                <input asp-for="Paternoster.IsFull" class="form-check-input" />
-                <span asp-validation-for="Paternoster.IsFull" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Paternoster.Containers" class="control-label"></label>
-                <input asp-for="Paternoster.Containers" class="form-control" />
-                <span asp-validation-for="Paternoster.Containers" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Paternoster.Location" class="control-label"></label>
-                <input asp-for="Paternoster.Location" class="form-control" />
+                <label asp-for="Paternoster.Location" class="control-label">In welke ruimte staat de paternoster</label>
+                <input asp-for="Paternoster.Location" class="form-control" placeholder="room 000"/>
                 <span asp-validation-for="Paternoster.Location" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Paternoster Aanmaken" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a class="btn btn-primary" asp-area="" asp-page="./Create">Terug naar Creatie-scherm</a>
 </div>
 
 @section Scripts {

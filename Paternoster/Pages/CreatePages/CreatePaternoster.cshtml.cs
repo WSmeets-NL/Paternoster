@@ -10,6 +10,8 @@ public class CreatePaternosterModel : PageModel
 {
     private readonly PaternosterDbContext _context;
 
+    public List<PaternosterSystem> PaternosterSystems { get; set; }
+
     public CreatePaternosterModel(PaternosterDbContext context)
     {
         _context = context;
@@ -17,6 +19,7 @@ public class CreatePaternosterModel : PageModel
 
     public IActionResult OnGet()
     {
+        PaternosterSystems = _context.PaternosterSystems.ToList();
         return Page();
     }
 
