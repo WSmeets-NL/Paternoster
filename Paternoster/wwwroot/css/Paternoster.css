@@ -12227,3 +12227,7 @@ table,
     border-style: solid;
     margin-block: 10px;
 }
+
+.amount-alert{
+    background-color: palevioletred
+}

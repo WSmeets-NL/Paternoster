@@ -27,12 +27,19 @@
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Order.Customer" class="control-label"></label>
-                <select asp-for="Order.Customer" class="form-control" aria-required="true">
-                    @foreach(Customer customer in Model.Customer)
-                </select>"
+                <input asp-for="Order.Customer" class="form-control" aria-required="true"/>
                 <span asp-validation-for="Order.Customer" class="text-danger"></span>
             </div>
-
+            <div class="form-group">
+                <label asp-for="Order.CustomerId" class="control-label"></label>
+                <input asp-for="Order.CustomerId" class="form-control" />
+                <span asp-validation-for="Order.CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Order.IsFinished" class="control-label"></label>
+                <input asp-for="Order.IsFinished" class="form-check-input" />
+                <span asp-validation-for="Order.IsFinished" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

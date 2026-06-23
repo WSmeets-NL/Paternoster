@@ -47,7 +47,15 @@
                 <td>@part.Container.Paternoster.Location</td>
                 <td>@part.Container.ContainerCode</td>
                 <td>@part.Name</td>
-                <td>@part.Container.PartAmount</td>
+                @if (part.Container.PartAmount <= 5)
+                {
+                        <td class="amount-alert">@part.Container.PartAmount     &#x26A0;</td>
+                }
+                else
+                {
+                    <td>@part.Container.PartAmount</td>
+                }
+
             </tr>
             }
         }
