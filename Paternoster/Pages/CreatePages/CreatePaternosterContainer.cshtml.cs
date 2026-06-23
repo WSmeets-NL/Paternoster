@@ -10,6 +10,7 @@ public class CreatePaternosterContainerModel : PageModel
 {
     private readonly PaternosterDbContext _context;
 
+    public List<Models.Paternoster> Paternosters { get; set; }
     public CreatePaternosterContainerModel(PaternosterDbContext context)
     {
         _context = context;
@@ -17,6 +18,7 @@ public class CreatePaternosterContainerModel : PageModel
 
     public IActionResult OnGet()
     {
+        Paternosters = (List<Models.Paternoster>)_context.Paternosters.Where(p => p.IsFull != true).ToList();
         return Page();
     }
 
@@ -26,14 +28,10 @@ public class CreatePaternosterContainerModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
 
         _context.PaternosterContainers.Add(PaternosterContainer);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("./Index");
+        return RedirectToPage("./Create");
     }
 }
