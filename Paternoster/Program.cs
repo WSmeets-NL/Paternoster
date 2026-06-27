@@ -51,18 +51,20 @@ namespace Paternoster
             app.MapRazorPages()
                .WithStaticAssets();
 
-            var scope = app.Services.CreateScope();
-            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            //The commented code below was used to add the four roles useers can have when using this application. It is no longer necessary but kept for completeness.
 
-            List<string> roles = ["Administrator", "Sales", "Manufacturing", "Inventory"];
+            //var scope = app.Services.CreateScope();
+            //var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            foreach (var role in roles)
-            {
-                if (!await roleManager.RoleExistsAsync(role))
-                {
-                    await roleManager.CreateAsync(new IdentityRole(role));
-                }
-            }
+            //List<string> roles = ["Administrator", "Sales", "Manufacturing", "Inventory"];
+
+            //foreach (var role in roles)
+            //{
+            //    if (!await roleManager.RoleExistsAsync(role))
+            //    {
+            //        await roleManager.CreateAsync(new IdentityRole(role));
+            //    }
+            //}
 
             app.Run();
         }

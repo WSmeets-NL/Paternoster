@@ -6,6 +6,7 @@ using Paternoster.Models;
 
 namespace Paternoster.Pages
 {
+    //This page is used to assign roles to the different useers. For the purposes of this demo it is not required to navigate to this page. However, it is kept here for study purposes.
     public class AssignRolesModel : PageModel
     {
 

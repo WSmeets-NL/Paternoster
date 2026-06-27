@@ -35,6 +35,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Create">Maak een nieuw item</a>
                         </li>
+
+                        <li class="nav-item">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                <button type="submit" class="nav-link btn btn-link text-dark">Uitloggen</button>
+                            </form>
+                        </li>
+                        <li>
+                            <p>Welkom @User.Identity?.Name</p>
+                        </li>
                     </ul>
                 </div>
             </div>
