@@ -1,0 +1,22 @@
+﻿@page
+@model CreateModel
+@{
+    ViewData["Title"] = "Maak Nieuw Item";
+}
+
+<div>
+    <h1>Welkom in het creatiescherm.</h1>
+    <h2>Gelieve hieronder aan te geven wat je wil maken</h2>
+
+    <form method="get">
+        <label for="itemToCreate">Ik wil een nieuw:</label>
+        <select name="itemToCreate">
+            <option value="">-----</option>
+        @foreach(string item in Model.PossibleItemsToCreate)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+            <input class="btn btn-primary" value="enter" type="submit" />
+        </form>
+</div>

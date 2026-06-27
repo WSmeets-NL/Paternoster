@@ -36,25 +36,29 @@
 <div class="container">
     @if (Model.Orders != null)
     {
-        <ul>
-            @foreach (Order order in Model.Orders)
-            {
-                <li>
-                    <div class="ordercontainer">
-                    <p>Klant: @order.Customer.Name</p>
-                    <p>OrderNummer: @order.OrderCode</p>
-                    <p>producten: </p>
-                    @foreach (OrderLine orderLine in Model.OrderLines)
-                    {
-                        @if (orderLine.OrderId == order.Id)
-                        {
-                            <p>@orderLine.ProductAmount x @orderLine.Product.Name</p>
-                        }
-                    }
-                    </div>
-                </li>
-            }
-        </ul>
+        @foreach (Order order in Model.Orders)
+        {
+            <div>
+                <ul>
+                    <li>
+                        <div class="ordercontainer">
+                            <p>Klant: @order.Customer.Name</p>
+                            <p>OrderNummer: @order.OrderCode</p>
+                            <p>producten: </p>
+                            @foreach (OrderLine orderLine in Model.OrderLines)
+                            {
+                                @if (orderLine.OrderId == order.Id)
+                                {
+                                    <p>@orderLine.ProductAmount x @orderLine.Product.Name</p>
+                                }
+                            }
+                            <a class="btn btn-primary" asp-area="" asp-page="/WorkOrder" asp-route-id="@order.Id">Selecteer order</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        }
+
     }
     else
     {

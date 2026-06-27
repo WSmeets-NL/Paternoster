@@ -13,9 +13,9 @@ namespace Paternoster.Models
 
         public int? PartId { get; set; }
 
-        [Required]
         public Paternoster Paternoster { get; set; }
 
+        [Required]
         public int PaternosterId { get; set; }
 
         public int PartAmount { get; set; }

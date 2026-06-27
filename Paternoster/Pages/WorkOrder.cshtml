@@ -1,0 +1,61 @@
+@page 
+@model WorkOrderModel
+@using Paternoster.Models
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>@Model.Order.OrderCode</h4>
+<hr />
+
+<h5>Figurines</h5>
+<div class="row"><<ul>
+@foreach(OrderLine orderLine in Model.OrderLines)
+        {
+            <li>@orderLine.ProductAmount X @orderLine.Product.Name</li>
+        }
+
+</ul>
+</div>
+
+<div class="row">
+    <<ul>
+        @foreach (ProductPart productPart in Model.ProductParts)
+        {
+            
+        }
+
+    </ul>
+</div>
+
+
+
+<div class="row">
+    @if (Model.IsFinishable != false)
+    {
+        <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <input type="submit" value="Voltooi Order" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    }
+    else
+    {
+        <div class="col-md-4">
+            <p>Sorry, maar je kan deze order niet afmaken.</p>
+        </div>
+    }
+   
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

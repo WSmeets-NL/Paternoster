@@ -1,0 +1,36 @@
+@page
+@model CreatePaternosterSystemModel
+@using Paternoster.Models;
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Nieuw PaternosterSysteem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="PaternosterSystem.Name" class="control-label"></label>
+                <input asp-for="PaternosterSystem.Name" class="form-control" aria-required="true"/>
+                <span asp-validation-for="PaternosterSystem.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Paternostersysteem aanmaken" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary" asp-area="" asp-page="/Create">Terug naar Creatie-scherm</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

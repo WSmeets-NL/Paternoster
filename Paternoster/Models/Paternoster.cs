@@ -9,8 +9,8 @@ namespace Paternoster.Models
         [Required]
         public string PaternosterCode { get; set; }
 
-        [Required]
         public PaternosterSystem PaternosterSystem { get; set; }
+
         [Required]
         public int NumberOfContainers { get; set;  }
 
