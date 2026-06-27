@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.Sqlite;
@@ -7,6 +8,7 @@ using System.IO;
 
 namespace Paternoster.Pages
 {
+    [Authorize(Roles = "Administrator, Sales, Manufacturing")]
     public class OrdersModel : PageModel
     {
         private readonly PaternosterDbContext _context;

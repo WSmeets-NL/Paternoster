@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Paternoster.DAL;
@@ -5,6 +6,7 @@ using Paternoster.Models;
 
 namespace Paternoster.Pages
 {
+    [Authorize(Roles = "Administrator, Sales, Inventory")]
     public class CreateModel : PageModel
     {
 
