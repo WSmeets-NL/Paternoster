@@ -8,7 +8,7 @@ namespace Paternoster.Pages
     public class CreateModel : PageModel
     {
 
-        public IEnumerable<string> PossibleItemsToCreate { get; } = ["paternostersysteem", "paternoster", "paternostercontainer", "onderdeel", "product", "order", "klant"];
+        public IEnumerable<string> PossibleItemsToCreate { get; } = ["paternostersysteem", "paternoster", "paternostercontainer", "onderdeel", "product"];
 
         public CreateModel() { }
 
@@ -47,15 +47,6 @@ namespace Paternoster.Pages
                             return RedirectToPage("./CreatePages//CreateProduct");
                         }
 
-                    case "order":
-                        {
-                            return RedirectToPage("./CreatePages//CreateOrder");
-                        }
-
-                    case "klant":
-                        {
-                            return RedirectToPage("./CreatePages//CreateCustomer");
-                        }
                     default:
                         {
                             return Page();

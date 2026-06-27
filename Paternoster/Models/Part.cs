@@ -14,9 +14,10 @@ namespace Paternoster.Models
         [Required]
         public string PartCode { get; set; }
 
-        [Required]
+
         public PaternosterContainer Container { get; set; }
 
+        [Required]
         public int ContainerId { get; set; }
 
         public List<ProductPart> Products { get; set; } = new List<ProductPart>();

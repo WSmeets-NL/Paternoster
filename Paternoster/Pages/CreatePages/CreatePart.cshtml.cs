@@ -15,8 +15,11 @@ public class CreatePartModel : PageModel
         _context = context;
     }
 
+    public List<PaternosterContainer> PaternosterContainers { get; set; }
+
     public IActionResult OnGet()
     {
+        PaternosterContainers = _context.PaternosterContainers.Where(c => c.PartId == null).ToList();
         return Page();
     }
 
@@ -26,14 +29,20 @@ public class CreatePartModel : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
 
         _context.Parts.Add(Part);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("./Index");
+        PaternosterContainer paternosterContainer = (PaternosterContainer) _context.PaternosterContainers.Where(c => c.Id == Part.ContainerId).FirstOrDefault();
+        if (paternosterContainer == null)
+        {
+            return NotFound();
+        }
+
+        paternosterContainer.PartId = Part.Id;
+
+        await _context.SaveChangesAsync();
+
+        return RedirectToPage("/Index");
     }
 }

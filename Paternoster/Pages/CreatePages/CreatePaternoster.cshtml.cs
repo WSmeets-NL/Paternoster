@@ -33,6 +33,6 @@ public class CreatePaternosterModel : PageModel
         _context.Paternosters.Add(Paternoster);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("./Create");
+        return RedirectToPage("/Index");
     }
 }

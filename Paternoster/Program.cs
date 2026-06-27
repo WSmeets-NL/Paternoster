@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Paternoster.DAL;
+using Microsoft.AspNetCore.Identity;
+using Paternoster.Models;
 
 namespace Paternoster
 {
@@ -13,6 +15,8 @@ namespace Paternoster
 
             builder.Services.AddDbContext<PaternosterDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<PaternosterDbContext>();
 
             builder.Services.AddRazorPages();
 
@@ -39,6 +43,7 @@ namespace Paternoster
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapStaticAssets();

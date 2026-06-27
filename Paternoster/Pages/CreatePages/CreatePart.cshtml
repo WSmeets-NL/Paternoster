@@ -1,6 +1,6 @@
 @page
 @model CreatePartModel
-
+@using Paternoster.Models
 @{
     ViewData["Title"] = "Create";
 }
@@ -15,32 +15,34 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Part.Name" class="control-label"></label>
+                <label asp-for="Part.Name" class="control-label">Hoe heet dit onderdeel?</label>
                 <input asp-for="Part.Name" class="form-control" aria-required="true"/>
                 <span asp-validation-for="Part.Name" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Part.PartCode" class="control-label"></label>
+                <label asp-for="Part.PartCode" class="control-label">Welke code heeft dit onderdeel?</label>
                 <input asp-for="Part.PartCode" class="form-control" aria-required="true"/>
                 <span asp-validation-for="Part.PartCode" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <span class="text-danger">*</span>
-                <label asp-for="Part.Container" class="control-label"></label>
-                <input asp-for="Part.Container" class="form-control" aria-required="true"/>
-                <span asp-validation-for="Part.Container" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Part.ContainerId" class="control-label"></label>
-                <input asp-for="Part.ContainerId" class="form-control" />
+                <label asp-for="Part.ContainerId" class="control-label">In welke container gaat dit onderdeel?</label>
+                <select asp-for="Part.ContainerId" class="form-control">
+                    <option value="">---Selecteer Container---</option>
+                    @foreach (PaternosterContainer paternosterContainer in Model.PaternosterContainers)
+                    {
+                        <option value="@paternosterContainer.Id">@paternosterContainer.ContainerCode</option>
+                    }
+                </select>
                 <span asp-validation-for="Part.ContainerId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Part.Products" class="control-label"></label>
-                <input asp-for="Part.Products" class="form-control" />
-                <span asp-validation-for="Part.Products" class="text-danger"></span>
+
+            <div>
+                <a class="btn btn-primary" asp-area="" asp-page="./CreatePaternosterContainer">PaternosterContainer Toevoegen</a>
             </div>
+
             <div class="form-group">
                 <label asp-for="Part.ImageReference" class="control-label"></label>
                 <input asp-for="Part.ImageReference" class="form-control" />
@@ -54,8 +56,9 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a class="btn btn-primary" asp-area="" asp-page="/Create">Terug naar Creatie-scherm</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

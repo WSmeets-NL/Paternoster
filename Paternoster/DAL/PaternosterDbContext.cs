@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Paternoster.Models;
 using System.Collections.Generic;
 
 namespace Paternoster.DAL
 {
-    public class PaternosterDbContext : DbContext
+    public class PaternosterDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<PaternosterSystem> PaternosterSystems { get; set; }
 
@@ -30,6 +31,8 @@ namespace Paternoster.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Models.Paternoster>()
                 .HasOne(p => p.PaternosterSystem)
                 .WithMany(s => s.Paternosters)

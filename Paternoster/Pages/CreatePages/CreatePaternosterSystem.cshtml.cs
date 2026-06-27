@@ -24,21 +24,17 @@ public class CreatePaternosterSystemModel : PageModel
     public PaternosterSystem PaternosterSystem { get; set; } = default!;
 
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD.
-    public async Task<IActionResult> OnPostAsync(string name)
+    public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        PaternosterSystem paternosterSystem = new PaternosterSystem()
-        {
-            Name = name
-        };
 
-        _context.PaternosterSystems.Add(paternosterSystem);
+        _context.PaternosterSystems.Add(PaternosterSystem);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("./Index");
+        return RedirectToPage("/Index");
     }
 }

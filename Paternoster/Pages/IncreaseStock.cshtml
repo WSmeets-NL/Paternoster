@@ -1,0 +1,21 @@
+﻿@page
+@model IncreaseStockModel
+@using Paternoster.Models;
+@{
+    ViewData["Title"] = "My Inventory";
+}
+
+<h4>Vul de voorraad bij</h4>
+<h5>Onderdeel = @Model.ChosenPart.Name;</h5>
+
+<h5>Huidig voorraad =@Model.Container.PartAmount</h5>
+
+<form method="post">
+
+    <label for="addedAmount">Hoeveel eenheden wil je toevoegen?</label>
+    <input type="number" name="addedAmount" default="" placeholder="100" />
+
+    <input class="btn btn-primary" value="Voorraad toevoegen" type="submit" asp-route-id="@Model.ChosenPart.Id" />
+</form>
+
+<a class="btn btn-primary asp-area="" asp-page="/Inventory">Terug naar Voorraad</a>
