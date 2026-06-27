@@ -34,7 +34,10 @@
                 <th>Code van de Container</th>
                 <th>Naam Onderdeel</th>
                 <th>Huidige voorraad</th>
-                <th>Bijvullen</th>
+                @if (User.IsInRole("Administrator") || User.IsInRole("Inventory"))
+                {
+                    <th>Bijvullen</th>
+                }
             </tr>
         </thead>
     
@@ -56,10 +59,12 @@
                 {
                     <td>@part.Container.PartAmount</td>
                 }
-
+                @if(User.IsInRole("Administrator") || User.IsInRole("Inventory"))
+                {
                 <td>
                      <a class="btn btn-primary" asp-page="/IncreaseStock" asp-route-id="@part.Id">Vul bij</a>
                 </td>
+                }
 
             </tr>
             }

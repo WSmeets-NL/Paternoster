@@ -7,7 +7,7 @@ namespace Paternoster
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,7 @@ namespace Paternoster
             builder.Services.AddDbContext<PaternosterDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<PaternosterDbContext>();
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<PaternosterDbContext>();
 
             builder.Services.AddRazorPages();
 
@@ -45,10 +45,24 @@ namespace Paternoster
 
             app.UseAuthentication();
             app.UseAuthorization();
+            
 
             app.MapStaticAssets();
             app.MapRazorPages()
                .WithStaticAssets();
+
+            var scope = app.Services.CreateScope();
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            List<string> roles = ["Administrator", "Sales", "Manufacturing", "Inventory"];
+
+            foreach (var role in roles)
+            {
+                if (!await roleManager.RoleExistsAsync(role))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                }
+            }
 
             app.Run();
         }

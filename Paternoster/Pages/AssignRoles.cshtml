@@ -1,0 +1,22 @@
+﻿@page
+@model Paternoster.Pages.AssignRolesModel
+
+<h2>Rollen toewijzen</h2>
+
+<form method="post">
+    <select name="userId">
+        @foreach (var user in Model.Users)
+        {
+            <option value="@user.Id">@user.Email</option>
+        }
+    </select>
+
+    <select name="role">
+        @foreach (var role in Model.Roles)
+        {
+            <option value="@role.Name">@role.Name</option>
+        }
+    </select>
+
+    <button type="submit">Toewijzen</button>
+</form>

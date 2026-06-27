@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Paternoster.Models;
 using System.Collections.Generic;
 
 namespace Paternoster.DAL
 {
-    public class PaternosterDbContext : IdentityDbContext<ApplicationUser>
+    public class PaternosterDbContext : IdentityDbContext<ApplicationUser, IdentityRole, String>
     {
         public DbSet<PaternosterSystem> PaternosterSystems { get; set; }
 
