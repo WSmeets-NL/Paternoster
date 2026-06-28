@@ -45,6 +45,6 @@ public class CreatePartModel : PageModel
 
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("/Index");
+        return RedirectToPage($"/FigurinePart?Name={Part.Name}");
     }
 }

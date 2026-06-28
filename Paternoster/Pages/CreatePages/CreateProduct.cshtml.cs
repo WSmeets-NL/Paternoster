@@ -36,6 +36,6 @@ public class CreateProductModel : PageModel
         _context.Products.Add(Product);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("./Index");
+        return RedirectToPage("/Products", new { name = Product.Name});
     }
 }

@@ -12,11 +12,25 @@
         <label for="itemToCreate">Ik wil een nieuw:</label>
         <select name="itemToCreate">
             <option value="">-----</option>
-        @foreach(string item in Model.PossibleItemsToCreate)
+
+        @if(User.IsInRole("Inventory"))
+            @foreach(string item in Model.InventoryItemsToCreate)
             {
                 <option value="@item">@item</option>
             }
-        </select>
+
+        else @if(User.IsInRole("Sales"))
+            @foreach (string item in Model.SalesItemsToCreate)
+            {
+                <option value="@item">@item</option>
+            }
+
+        else 
+            @foreach (string item in Model.PossibleItemsToCreate)
+                {
+                    <option value="@item">@item</option>
+                }
+         </select>
             <input class="btn btn-primary" value="enter" type="submit" />
         </form>
 </div>

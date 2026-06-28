@@ -34,6 +34,6 @@ public class CreatePaternosterContainerModel : PageModel
         _context.PaternosterContainers.Add(PaternosterContainer);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("/Create");
+        return RedirectToPage($"/Inventory?paternosterId={PaternosterContainer.PaternosterId}");
     }
 }

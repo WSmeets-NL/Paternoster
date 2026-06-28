@@ -52,7 +52,10 @@
                                     <p>@orderLine.ProductAmount x @orderLine.Product.Name</p>
                                 }
                             }
-                            <a class="btn btn-primary" asp-area="" asp-page="/WorkOrder" asp-route-id="@order.Id">Selecteer order</a>
+                            @if(User.IsInRole("Manufacturing"))
+                            {
+                                <a class="btn btn-primary" asp-area="" asp-page="/WorkOrder" asp-route-id="@order.Id">Selecteer order</a>
+                            }
                         </div>
                     </li>
                 </ul>

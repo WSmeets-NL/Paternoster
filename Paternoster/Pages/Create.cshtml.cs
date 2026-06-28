@@ -10,7 +10,11 @@ namespace Paternoster.Pages
     public class CreateModel : PageModel
     {
 
-        public IEnumerable<string> PossibleItemsToCreate { get; } = ["paternostersysteem", "paternoster", "paternostercontainer", "onderdeel", "product"];
+        public IEnumerable<string> PossibleItemsToCreate { get; } = ["Paternostersysteem", "Paternoster", "Paternostercontainer", "Onderdeel", "Product"];
+
+        public IEnumerable<string> InventoryItemsToCreate { get; } = ["Paternostersysteem", "Paternoster", "Paternostercontainer", "Onderdeel"];
+
+        public IEnumerable<string> SalesItemsToCreate { get; } = ["Product"];
 
         public CreateModel() { }
 
@@ -21,41 +25,43 @@ namespace Paternoster.Pages
                 return Page();
             }
 
-            else
+            if ((User.IsInRole("Administrator")) || 
+               (User.IsInRole("Sales") && SalesItemsToCreate.Contains(itemToCreate)) || 
+               (User.IsInRole("Inventory") && InventoryItemsToCreate.Contains(itemToCreate)))
             {
                 switch (itemToCreate)
                 {
-                    case "paternostersysteem":
+                    case "Paternostersysteem":
                         {
-                           return RedirectToPage("./CreatePages/CreatePaternosterSystem");
+                            return RedirectToPage("/CreatePages/CreatePaternosterSystem");
                         }
-
-                    case "paternoster":
+                    case "Paternoster":
                         {
-                            return RedirectToPage("./CreatePages/CreatePaternoster");
+                            return RedirectToPage("/CreatePages/CreatePaternoster");
                         }
-
-                    case "paternostercontainer":
+                    case "Paternostercontainer":
                         {
-                            return RedirectToPage("./CreatePages//CreatePaternosterContainer");
+                            return RedirectToPage("/CreatePages/CreatePaternosterContainer");
                         }
-                    case "onderdeel":
+                    case "Product":
                         {
-                            return RedirectToPage("./CreatePages//CreatePart");
+                            return RedirectToPage("/CreatePages/CreateProduct");
                         }
-
-                    case "product":
+                    case "Onderdeel":
                         {
-                            return RedirectToPage("./CreatePages//CreateProduct");
+                            return RedirectToPage("/CreatePages/CreatePart");
                         }
-
                     default:
                         {
                             return Page();
                         }
-
                 }
             }
+            else
+            {
+                return Page();
+            }
         }
-    }   
-}
+    }
+}   
+
