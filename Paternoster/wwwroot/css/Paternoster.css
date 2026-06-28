@@ -12221,19 +12221,13 @@ table,
   font-size: 0.9625rem;
 }
 
-.productcontainer, .ordercontainer, .partcontainer {
-    border-width: 2px;
-    border-color: black;
-    border-style: solid;
-    margin-block: 10px;
-}
 
 .amount-alert{
     background-color: palevioletred
 }
 
 
-.product-container {
+.product-container, .part-container {
     display: flex;
     gap: 20px;
     padding: 20px;
@@ -12247,7 +12241,7 @@ table,
 }
 
 /* Header: naam + code */
-.product-header {
+.product-header, .part-header {
     width: 50%;
     display: flex;
     justify-content: space-between;
@@ -12290,7 +12284,7 @@ table,
 
 
 
-.product-image {
+.product-image, .part-image{
     max-width: 100%;
     border-radius: 6px;
     object-fit: cover;

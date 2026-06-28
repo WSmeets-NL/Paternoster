@@ -28,15 +28,34 @@
     {
         foreach (Part part in Model.Parts)
         {
-            <div class="partcontainer">
-                <h4>Naam:</h4>
-                <p>@part.Name</p>
-                <h4>Code:</h4>
-                <p>@part.PartCode</p>
+            <div class="part-container">
+                <div class="info-container">
+                    <div class="part-header">
+                        <h4>Naam:</h4>
+                        <p>@part.Name</p>
+                    </div>
+
+                    <div class="part-header">
+                        <h4>Code:</h4>
+                        <p>@part.PartCode</p>
+                    </div>
+
                 <h4>Paternoster : Container</h4>
                 <p>@part.Container.Paternoster.PaternosterCode : @part.Container.ContainerCode</p>
                 <h4>Huidige voorraad</h4>
                 <p>@part.Container.PartAmount stuks</p>
+            </div>
+
+            <div class="image-container">
+                @if (part.ImageReference != null)
+                {
+                    <img src="/Images/PartImages/@part.ImageReference" class="part-image">
+                }
+                else
+                {
+                    <img src="/Images/PartImages/Placeholder.jpg" class="part-image">
+                }
+                </div>
             </div>
         }
     }
