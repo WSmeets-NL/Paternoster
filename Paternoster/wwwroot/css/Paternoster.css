@@ -12231,3 +12231,79 @@ table,
 .amount-alert{
     background-color: palevioletred
 }
+
+
+.product-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    border-color: black;
+    max-width: 100%;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Header: naam + code */
+.product-header {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+    border-color:black;
+}
+
+.product-name {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.product-code {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Body: onderdelen + afbeelding naast elkaar */
+.product-body {
+    display: flex;
+    gap: 16px;
+}
+
+/* Lijst met onderdelen */
+.product-info {
+    flex: 2;
+}
+
+.parts-title {
+    font-size: 1rem;
+    margin: 0 0 8px;
+}
+
+.parts-list {
+    list-style: disc;
+    padding-left: 18px;
+    margin: 0;
+}
+
+
+
+.product-image {
+    max-width: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+    justify-content:center;
+}
+
+.info-container {
+    flex: 1;
+    width:50%;
+}
+
+.image-container {
+    flex 2;
+    width: 50%;
+    align-items: flex-start;
+}

@@ -27,7 +27,7 @@
     </form>
 </div>
 
-<div class="container">
+<div>
     @if (Model.Products == null)
     {
         <h2>Sorry, maar ik heb geen producten gevonden. Probeer een nieuwe zoekopdracht.</h2>
@@ -36,18 +36,37 @@
     {
         foreach (Product product in Model.Products)
         {
-            <div class="productcontainer">
-                <h3>Naam:</h3>
-                <p>@product.Name</p>
-                <h3>Code:</h3>
-                <p>@product.ProductCode</p>
-                <h3>Onderdelen</h3>
-                <ul>
-                    @foreach(ProductPart part in product.ProductParts)
+            <div class="product-container">
+                <div class="info-container">
+                    <div class="product-header">
+                        <h3>Naam:</h3>
+                        <p>@product.Name</p>
+                    </div>
+                    <div class="product-header">
+                        <h3>Code:</h3>
+                        <p>@product.ProductCode</p>
+                    </div>
+                    <div class="product-info">
+                        <h3>Onderdelen</h3>
+                        <ul class="parts-list">
+                            @foreach(ProductPart part in product.ProductParts)
+                            {
+                                <li>@part.PartAmount x @part.Part.Name</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-container">
+                    @if (product.ImageReference != null)
                     {
-                        <li>@part.PartAmount x @part.Part.Name</li>
+                        <img src="/Images/ProductImages/@product.ImageReference" class="product-image">
                     }
-                </ul>
+                    else
+                    {
+                        <img src="/Images/ProductImages/Placeholder.jpg" class="product-image">
+                    }
+                </div>
             </div>
         }
     }
