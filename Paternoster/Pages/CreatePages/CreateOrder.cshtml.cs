@@ -36,6 +36,6 @@ public class CreateOrderModel : PageModel
         _context.Orders.Add(Order);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("./Index");
+        return RedirectToPage("./orders", new { SortedBy = "OrderId" });
     }
 }

@@ -35,6 +35,25 @@ public class CreatePaternosterModel : PageModel
         _context.Paternosters.Add(Paternoster);
         await _context.SaveChangesAsync();
 
+        int containerNumber = 1;
+        List<PaternosterContainer> newContainers = new List<PaternosterContainer>();
+        int containerCodeLength = Paternoster.NumberOfContainers.ToString().Length;
+    
+        while(containerNumber <= Paternoster.NumberOfContainers)
+        {
+            newContainers.Add(new PaternosterContainer
+            {
+                Id = 0,
+                ContainerCode = ($"{Paternoster.PaternosterCode}_" + containerNumber.ToString($"D{containerCodeLength}")),
+                PartAmount = 0,
+                PaternosterId = Paternoster.Id
+            });
+
+            containerNumber++;
+        }
+        _context.PaternosterContainers.AddRange(newContainers);
+        await _context.SaveChangesAsync();
+
         return RedirectToPage("/Inventory", new { PaternosterId = Paternoster.Id});
     }
 }
