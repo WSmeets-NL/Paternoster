@@ -21,14 +21,8 @@
             <option value="true">Omgekeerde volgorde</option>
         </select>
 
-        <label for="customerId">Zoek op klantnaam:</label>
-        <select name="customerId" default="">
-            <option value="">-----</option>
-            @foreach(Customer customer in Model.Customers)
-            {
-                <option value="@customer.Id">@customer.Name</option>
-            }
-        </select>
+        <label for="customerName">Zoek op klantnaam:</label>
+        <input type="text" name="customerName"/>
         <input class="btn btn-primary" value="sorteer" type="submit" />
     </form>
 </div>

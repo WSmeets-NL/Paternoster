@@ -11,7 +11,8 @@
 <hr />
 
 <h5>Figurines</h5>
-<div class="row"><<ul>
+<div class="row">
+<<ul>
 @foreach(OrderLine orderLine in Model.OrderLines)
         {
             <li>@orderLine.ProductAmount X @orderLine.Product.Name</li>
@@ -46,7 +47,10 @@
     else
     {
         <div class="col-md-4">
-            <p>Sorry, maar je kan deze order niet afmaken.</p>
+            <p>Sorry, maar van de volgende onderdelen is er niet genoeg op voorraad:</p>
+            <ul>
+
+            </ul>
         </div>
     }
    

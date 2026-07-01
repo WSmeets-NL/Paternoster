@@ -15,25 +15,20 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Product.ProductCode" class="control-label"></label>
+                <label asp-for="Product.ProductCode" class="control-label">Welke code heeft dit product?</label>
                 <input asp-for="Product.ProductCode" class="form-control" aria-required="true"/>
                 <span asp-validation-for="Product.ProductCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <span class="text-danger">*</span>
-                <label asp-for="Product.Name" class="control-label"></label>
+                <label asp-for="Product.Name" class="control-label">Wat is de naam van dit product?</label>
                 <input asp-for="Product.Name" class="form-control" aria-required="true"/>
                 <span asp-validation-for="Product.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.Affiliation" class="control-label"></label>
+                <label asp-for="Product.Affiliation" class="control-label">Tot welke groep/factie behoort dit product?</label>
                 <input asp-for="Product.Affiliation" class="form-control" />
                 <span asp-validation-for="Product.Affiliation" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Product.Orders" class="control-label"></label>
-                <input asp-for="Product.Orders" class="form-control" />
-                <span asp-validation-for="Product.Orders" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Product.ProductParts" class="control-label"></label>
