@@ -33,34 +33,43 @@
     </form>
 </div>
 
-<div class="container">
-    @if (Model.Orders != null)
+<div>
+ @if (Model.Orders != null)
     {
-        @foreach (Order order in Model.Orders)
-        {
-            <div>
+
+    @foreach (Order order in Model.Orders)
+    {
+        <div class="order-container">
+            <div class="order-header">
+                <h3>Klantnaam:</h3>
+                    <p>@order.Customer.Name</p>
+            </div>
+                <div class="order-header">
+                    <h3>Ordernummer:</h3>
+                    <p>@order.OrderCode</p>
+                </div>
+            <div class="order-container">
+                <h3>Producten:</h3>
                 <ul>
-                    <li>
-                        <div class="ordercontainer">
-                            <p>Klant: @order.Customer.Name</p>
-                            <p>OrderNummer: @order.OrderCode</p>
-                            <p>producten: </p>
-                            @foreach (OrderLine orderLine in Model.OrderLines)
+                        @foreach (OrderLine orderLine in Model.OrderLines)
+                        {
+                            @if (orderLine.OrderId == order.Id)
                             {
-                                @if (orderLine.OrderId == order.Id)
-                                {
+                                <li>
                                     <p>@orderLine.ProductAmount x @orderLine.Product.Name</p>
-                                }
+                                </li>
                             }
-                            @if(User.IsInRole("Manufacturing"))
-                            {
-                                <a class="btn btn-primary" asp-area="" asp-page="/WorkOrder" asp-route-id="@order.Id">Selecteer order</a>
-                            }
-                        </div>
-                    </li>
+                        }
                 </ul>
             </div>
-        }
+            @if (User.IsInRole("Manufacturing"))
+            {
+                <div>
+                     <a class="btn btn-primary" asp-area="" asp-page="/WorkOrder" asp-route-id="@order.Id">Selecteer order</a>
+                </div>
+            }
+        </div>
+    }
 
     }
     else
