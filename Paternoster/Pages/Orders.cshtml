@@ -6,7 +6,7 @@
 }
 
 <h1>Alle Orders</h1>
-<div class="container">
+<fieldset class="searchbar">
     <form>
         <label for="orderedBy">Sorteren op:</label>
         <select name="orderedBy" default="">
@@ -25,24 +25,26 @@
         <input type="text" name="customerName"/>
         <input class="btn btn-primary" value="sorteer" type="submit" />
     </form>
-</div>
+</fieldset>
 
-<div>
+<div class="Order-Grid">
  @if (Model.Orders != null)
     {
 
     @foreach (Order order in Model.Orders)
     {
-        <div class="order-container">
-            <div class="order-header">
+        <div class="Order-Container">
+            <div class="Order-Header">
                 <h3>Klantnaam:</h3>
                     <p>@order.Customer.Name</p>
             </div>
-                <div class="order-header">
-                    <h3>Ordernummer:</h3>
-                    <p>@order.OrderCode</p>
-                </div>
-            <div class="order-container">
+
+            <div class="Order-Header">
+                <h3>Ordernummer:</h3>
+                <p>@order.OrderCode</p>
+            </div>
+
+            <div class="Order-Product-List">
                 <h3>Producten:</h3>
                 <ul>
                         @foreach (OrderLine orderLine in Model.OrderLines)

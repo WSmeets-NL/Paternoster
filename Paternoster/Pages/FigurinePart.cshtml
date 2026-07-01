@@ -5,7 +5,7 @@
     ViewData["Title"] = "FigurinePart";
 }
 <h1>Zoek een onderdeel:</h1>
-<div class="container">
+<fieldset class="searchbar>"
     <form method="get">
 
         <label for="name"> Naam van het onderdeel:</label>
@@ -21,42 +21,47 @@
         <input type="submit" value="&#x1F50D;" />
 
      </form>
-</div>
+</fieldset>
 
-<div class="container">
+<div class="Parts-Grid">
     @if(Model.Parts != null)
     {
         foreach (Part part in Model.Parts)
         {
-            <div class="part-container">
-                <div class="info-container">
-                    <div class="part-header">
-                        <h4>Naam:</h4>
-                        <p>@part.Name</p>
-                    </div>
-
-                    <div class="part-header">
-                        <h4>Code:</h4>
-                        <p>@part.PartCode</p>
-                    </div>
-
-                <h4>Paternoster : Container</h4>
-                <p>@part.Container.Paternoster.PaternosterCode : @part.Container.ContainerCode</p>
-                <h4>Huidige voorraad</h4>
-                <p>@part.Container.PartAmount stuks</p>
-            </div>
-
-            <div class="image-container">
+        <div class="Part-Container">
+            <div class="Part-Image-Container">
                 @if (part.ImageReference != null)
                 {
-                    <img src="/Images/PartImages/@part.ImageReference" class="part-image">
+                    <img class="Part-Image" src="/Images/PartImages/@part.ImageReference">
                 }
                 else
                 {
-                    <img src="/Images/PartImages/Placeholder.jpg" class="part-image">
+                    <img class="Part-Image" src="/Images/PartImages/Placeholder.jpg">
                 }
+            </div>
+
+            <div class="Part-Info-Container">
+                <div class="Part-Header">
+                    <h4>Naam:</h4>
+                    <p>@part.Name</p>
+                </div>
+
+                <div class="Part-Header">
+                    <h4>Code:</h4>
+                    <p>@part.PartCode</p>
+                </div>
+
+                <div class="Part-Header">
+                    <h4>Paternoster : Container</h4>
+                    <p>@part.Container.Paternoster.PaternosterCode : @part.Container.ContainerCode</p>
+                </div>
+
+                <div class="Part-Header">
+                    <h4>Huidige voorraad</h4>
+                    <p>@part.Container.PartAmount stuks</p>
                 </div>
             </div>
+        </div>
         }
     }
     else

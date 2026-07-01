@@ -33,21 +33,19 @@ namespace Paternoster.Pages
                 if (customerName != null)
                 {
                     Customers.AddRange(_context.Customers.ToList().Where(c => c.Name.Contains(customerName, StringComparison.OrdinalIgnoreCase)));
-                        foreach (Customer customer in Customers)
-                    {
-                        Orders.AddRange(_context.Orders.ToList().Where(o => o.IsFinished == false && o.CustomerId == customer.Id));
-                    }
+
                 }
                 else 
                 {
                     Customers.AddRange(_context.Customers.ToList());
-                    foreach (Customer customer in Customers)
-                    {
-                        Orders.AddRange(_context.Orders.ToList().Where(o => o.IsFinished == false));
-                    }
                 }
 
-                foreach(Order order in Orders)
+                foreach (Customer customer in Customers)
+                {
+                    Orders.AddRange(_context.Orders.ToList().Where(o => o.IsFinished == false && o.CustomerId == customer.Id));
+                }
+
+                foreach (Order order in Orders)
                 {
                     var LinesInOrder = _context.OrderLines.ToList().Where(ol => ol.OrderId == order.Id);
                     OrderLines.AddRange(LinesInOrder);
@@ -58,6 +56,7 @@ namespace Paternoster.Pages
                     Products.AddRange(_context.Products.ToList().Where(p => p.Id == orderLine.ProductId));
                 }
 
+                OrderLines = OrderLines.DistinctBy(ol => ol.Id).ToList(); 
                 Products = Products.DistinctBy(p => p.Name).ToList();
             
                 switch (orderedBy)

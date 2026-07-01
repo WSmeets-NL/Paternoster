@@ -5,7 +5,7 @@
     ViewData["Title"] = "Producten";
 }
 <h1>Zoek een product:</h1>
-<div class="container">
+<fieldset class="searchbar">
     <form method="get">
         <label for="Name"> Naam van het Product:</label>
         <input name="Name" />
@@ -25,9 +25,9 @@
 
         <input class="btn btn-primary" type="submit" value="zoek" />
     </form>
-</div>
+</fieldset>
 
-<div>
+<div class="Products-Grid">
     @if (Model.Products == null)
     {
         <h2>Sorry, maar ik heb geen producten gevonden. Probeer een nieuwe zoekopdracht.</h2>
@@ -36,17 +36,29 @@
     {
         foreach (Product product in Model.Products)
         {
-            <div class="product-container">
-                <div class="info-container">
-                    <div class="product-header">
+            <div class="Product-Container">
+
+                <div class="Product-Image-Container">
+                    @if (product.ImageReference != null)
+                    {
+                        <img class="Product-Image" src="/Images/ProductImages/@product.ImageReference">
+                    }
+                    else
+                    {
+                        <img class="Product-Image" src="/Images/ProductImages/Placeholder.jpg">
+                    }
+                </div>
+
+                <div class="Product-Info-Container">
+                    <div class="Product-Header">
                         <h3>Naam:</h3>
                         <p>@product.Name</p>
                     </div>
-                    <div class="product-header">
+                    <div class="Product-Header">
                         <h3>Code:</h3>
                         <p>@product.ProductCode</p>
                     </div>
-                    <div class="product-info">
+                    <div class="Product-Parts-Info">
                         <h3>Onderdelen</h3>
                         <ul class="parts-list">
                             @foreach(ProductPart part in product.ProductParts)
@@ -57,16 +69,6 @@
                     </div>
                 </div>
 
-                <div class="image-container">
-                    @if (product.ImageReference != null)
-                    {
-                        <img src="/Images/ProductImages/@product.ImageReference" class="product-image">
-                    }
-                    else
-                    {
-                        <img src="/Images/ProductImages/Placeholder.jpg" class="product-image">
-                    }
-                </div>
             </div>
         }
     }

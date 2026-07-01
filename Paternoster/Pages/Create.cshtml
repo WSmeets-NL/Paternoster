@@ -7,30 +7,30 @@
 <div>
     <h1>Welkom in het creatiescherm.</h1>
     <h2>Wat wil je aanmaken?</h2>
+    <fieldset class="Create-Form">
+        <form method="get">
+            <label for="itemToCreate">Ik wil een nieuw:</label>
+            <select name="itemToCreate">
+                <option value="">-----</option>
+                @if(User.IsInRole("Inventory"))
+                    @foreach(string item in Model.InventoryItemsToCreate)
+                    {
+                        <option value="@item">@item</option>
+                    }
 
-    <form method="get">
-        <label for="itemToCreate">Ik wil een nieuw:</label>
-        <select name="itemToCreate">
-            <option value="">-----</option>
+                else @if(User.IsInRole("Sales"))
+                    @foreach (string item in Model.SalesItemsToCreate)
+                    {
+                        <option value="@item">@item</option>
+                    }
 
-        @if(User.IsInRole("Inventory"))
-            @foreach(string item in Model.InventoryItemsToCreate)
-            {
-                <option value="@item">@item</option>
-            }
-
-        else @if(User.IsInRole("Sales"))
-            @foreach (string item in Model.SalesItemsToCreate)
-            {
-                <option value="@item">@item</option>
-            }
-
-        else 
-            @foreach (string item in Model.PossibleItemsToCreate)
-                {
-                    <option value="@item">@item</option>
-                }
-         </select>
-            <input class="btn btn-primary" value="enter" type="submit" />
+                else 
+                    @foreach (string item in Model.PossibleItemsToCreate)
+                    {
+                        <option value="@item">@item</option>
+                    }
+            </select>
+            <input class="btn btn-primary" value="Nieuw Item aanmaken" type="submit" />
         </form>
+    </fieldset>
 </div>
