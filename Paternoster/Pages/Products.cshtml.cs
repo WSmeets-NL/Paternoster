@@ -28,11 +28,16 @@ namespace Paternoster.Pages
             _context = context;
             _environment = environment;
         }
-        public async void OnGetAsync(string? name, string? orderByName, string? affiliation)
+        public async void OnGetAsync(string? name, string? orderByName, string? affiliation, int? id)
         {
             try
             {
-                if (affiliation != null)
+                if (id != null)
+                {
+                    Products = _context.Products.ToList().Where(p => p.Id == id);
+                }
+
+                else if (affiliation != null)
                 {
                     if (name != null)
                     {
@@ -43,10 +48,12 @@ namespace Paternoster.Pages
                         Products = _context.Products.ToList().Where(p => p.Affiliation == affiliation);
                     }
                 }
+
                 else if (name != null)
                 {
                     Products = _context.Products.ToList().Where(p => p.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
                 }
+
                 else
                 {
                     Products = _context.Products.ToList();
