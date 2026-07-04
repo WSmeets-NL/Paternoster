@@ -1,35 +1,40 @@
 @page
-@model CreatePartModel
-@using Paternoster.Models
+@using Paternoster.Models;
+@model EditPartsModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Formulier voor het aanmaken van een nieuw onderdeel.</h1>
+<h1>Wijzig @Model.Part.Name</h1>
 <h4>Vul alstublieft zo veel mogelijk gegevens in. Invoervelden met een * zijn verplicht.</h4>
 <hr />
-<fieldset class="Create-Form">
+<fieldset class="Edit-Form">
     <div class="Form-Fields">
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+             <div class="form-group">
+                <input hidden asp-for="Part.Id" class="form-control" aria-required="true" />
+                <span asp-validation-for="Part.Id" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Part.Name" class="control-label">Hoe heet dit onderdeel?</label>
-                <input asp-for="Part.Name" class="form-control" aria-required="true"/>
+                <input asp-for="Part.Name" class="form-control" aria-required="true" />
                 <span asp-validation-for="Part.Name" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <span class="text-danger">*</span>
                 <label asp-for="Part.PartCode" class="control-label">Welke code heeft dit onderdeel?</label>
-                <input asp-for="Part.PartCode" class="form-control" aria-required="true"/>
+                <input asp-for="Part.PartCode" class="form-control" aria-required="true" />
                 <span asp-validation-for="Part.PartCode" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Part.ContainerId" class="control-label">In welke container gaat dit onderdeel?</label>
                 <select asp-for="Part.ContainerId" class="form-control">
-                    <option value="">---Selecteer Container---</option>
                     @foreach (PaternosterContainer paternosterContainer in Model.PaternosterContainers)
                     {
                         <option value="@paternosterContainer.Id">@paternosterContainer.ContainerCode</option>
@@ -43,21 +48,23 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Part.PartImage" class="control-label">Voeg hier een afbeelding van het onderdeel toe.</label>
+                <label asp-for="Part.PartImage" class="control-label"></label>
                 <input type="file" asp-for="Part.PartImage" class="form-control" />
                 <span asp-validation-for="Part.PartImage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Onderdeel toevoegen" class="btn btn-primary" />
+                <input type="submit" value="Wijziging doorvoeren" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </fieldset>
 
 <div>
-    <a class="btn btn-primary" asp-area="" asp-page="/Create">Terug naar Creatie-scherm</a>
+    <a class="btn btn-primary" asp-route-id="@Model.Part.Id" asp-page="/FigurinePart">Terug naar 'Zoek Onderdeel'</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

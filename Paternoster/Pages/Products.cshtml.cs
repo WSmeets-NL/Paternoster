@@ -4,6 +4,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Paternoster.DAL;
 using Paternoster.Models;
+using Microsoft.AspNetCore.Hosting;
 using System.Diagnostics.Eventing.Reader;
 
 namespace Paternoster.Pages
@@ -11,6 +12,8 @@ namespace Paternoster.Pages
     public class ProductsModel : PageModel
     {
         private readonly PaternosterDbContext _context;
+
+        public IWebHostEnvironment _environment { get; }
 
         public IEnumerable<Product> Products { get; set; } 
 
@@ -20,9 +23,10 @@ namespace Paternoster.Pages
 
         public List<Part> Parts { get; set; } = new List<Part>();
 
-        public ProductsModel(PaternosterDbContext context)
+        public ProductsModel(PaternosterDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
         public async void OnGetAsync(string? name, string? orderByName, string? affiliation)
         {
@@ -54,6 +58,7 @@ namespace Paternoster.Pages
                     ProductParts.AddRange(_context.ProductParts.ToList().Where(pp => pp.ProductId == product.Id));
                     Affiliations.Add(product.Affiliation);
                 }
+
             Affiliations = Affiliations.Distinct().ToList();
 
             foreach (ProductPart productPart in ProductParts)

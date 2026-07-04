@@ -36,12 +36,14 @@
     {
         foreach (Product product in Model.Products)
         {
+            string imageFileName = product.ProductCode + ".jpg";
+            string imageFileLocation = System.IO.Path.Combine(@Model._environment.WebRootPath, "Images", "ProductImages", imageFileName);
             <div class="Product-Container">
 
                 <div class="Product-Image-Container">
-                    @if (product.ProductImage != null)
+                    @if(System.IO.File.Exists(imageFileLocation))
                     {
-                        <img class="Product-Image" src="/Images/ProductImages/@product.ProductCode">
+                        <img class="Product-Image" src="/Images/ProductImages/@imageFileName">
                     }
                     else
                     {

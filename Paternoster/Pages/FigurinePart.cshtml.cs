@@ -27,11 +27,15 @@ namespace Paternoster.Pages
             _context = context;
         }
 
-        public async void OnGet(string? name, int? productId)
+        public async void OnGet(string? name, int? productId, int? partId)
         {
             try
             {
-                if(productId != null)
+                if(partId != null)
+                {
+                    ProductParts.AddRange(_context.ProductParts.ToList().Where(pp => pp.PartId == partId));
+                }
+                else if(productId != null)
                 {
                     ProductParts.AddRange(_context.ProductParts.ToList().Where(pp => pp.ProductId == productId));
                 }

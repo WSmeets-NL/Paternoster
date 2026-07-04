@@ -60,6 +60,9 @@
                     <h4>Huidige voorraad</h4>
                     <p>@part.Container.PartAmount stuks</p>
                 </div>
+                <div class="Part-Header">
+                        <a class="btn btn-primary" asp-route-id="@part.Id" asp-page="/EditPages/EditParts">&#128393</a>
+                </div>
             </div>
         </div>
         }

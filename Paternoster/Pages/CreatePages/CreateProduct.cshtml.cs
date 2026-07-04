@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Paternoster.DAL;
 using Paternoster.Models;
-using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Paternoster.Pages.CreatePages;
 
@@ -12,14 +12,14 @@ namespace Paternoster.Pages.CreatePages;
 public class CreateProductModel : PageModel
 {
     private readonly PaternosterDbContext _context;
-    [Obsolete]
-    private IHostingEnvironment _environment;
+
+    private IWebHostEnvironment _environment;
 
     [BindProperty]
     public Product Product { get; set; } = default!;
 
     [Obsolete]
-    public CreateProductModel(PaternosterDbContext context, IHostingEnvironment environment)
+    public CreateProductModel(PaternosterDbContext context, IWebHostEnvironment environment)
     {
         _context = context;
         _environment = environment;
