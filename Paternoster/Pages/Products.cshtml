@@ -39,9 +39,9 @@
             <div class="Product-Container">
 
                 <div class="Product-Image-Container">
-                    @if (product.ImageReference != null)
+                    @if (product.ProductImage != null)
                     {
-                        <img class="Product-Image" src="/Images/ProductImages/@product.ImageReference">
+                        <img class="Product-Image" src="/Images/ProductImages/@product.ProductCode">
                     }
                     else
                     {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Paternoster.DAL;
 using Paternoster.Models;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace Paternoster.Pages.CreatePages;
 
@@ -11,10 +12,17 @@ namespace Paternoster.Pages.CreatePages;
 public class CreateProductModel : PageModel
 {
     private readonly PaternosterDbContext _context;
+    [Obsolete]
+    private IHostingEnvironment _environment;
 
-    public CreateProductModel(PaternosterDbContext context)
+    [BindProperty]
+    public Product Product { get; set; } = default!;
+
+    [Obsolete]
+    public CreateProductModel(PaternosterDbContext context, IHostingEnvironment environment)
     {
         _context = context;
+        _environment = environment;
     }
 
     public IActionResult OnGet()
@@ -22,16 +30,19 @@ public class CreateProductModel : PageModel
         return Page();
     }
 
-    [BindProperty]
-    public Product Product { get; set; } = default!;
-
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
+
+        if(Product.ProductImage != null)
         {
-            return Page();
-        }
+            string imageName = Product.ProductCode + Path.GetExtension(Product.ProductImage.FileName);
+            var imageFile = Path.Combine(_environment.WebRootPath, "Images", "ProductImages", imageName);
+            using(var filestream = new FileStream(imageFile, FileMode.Create)) 
+            {
+                await Product.ProductImage.CopyToAsync(filestream);
+            }
+        }    
 
         _context.Products.Add(Product);
         await _context.SaveChangesAsync();

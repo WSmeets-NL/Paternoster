@@ -22,7 +22,7 @@ namespace Paternoster.Models
 
         public List<ProductPart> Products { get; set; } = new List<ProductPart>();
 
-        public string? ImageReference { get; set; }
+        public IFormFile? PartImage { get; set; }
 
     }
 }

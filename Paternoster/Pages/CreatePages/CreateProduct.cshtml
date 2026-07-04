@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="Form-Fields">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <span class="text-danger">*</span>
@@ -31,13 +31,13 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Product.ImageReference" class="control-label"></label>
-                <input asp-for="Product.ImageReference" class="form-control" />
-                <span asp-validation-for="Product.ImageReference" class="text-danger"></span>
+                <label asp-for="Product.ProductImage" class="control-label">Voeg een afbeelding toe:</label>
+                <input type="file" asp-for="Product.ProductImage" class="form-control" />
+                <span asp-validation-for="Product.ProductImage" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Product Aanmaken" class="btn btn-primary" />
             </div>
         </form>
     </div>
