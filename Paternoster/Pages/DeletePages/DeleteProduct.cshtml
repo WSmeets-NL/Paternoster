@@ -1,0 +1,20 @@
+@page
+@model DeleteProductModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3>Weet je zeker dat je "@Model.Product.Name" wil verwijderen?</h3>
+<div>
+
+    <div class="delete-buttons">
+        <form method="post">
+            <input type="hidden" asp-for="Product.Id" />
+            <input class="delete-button" type="submit" value="Verwijder" />
+        </form>
+        <a class="return-button" asp-page="/Products">Nee, keer terug</a>
+    </div>
+
+
+</div>

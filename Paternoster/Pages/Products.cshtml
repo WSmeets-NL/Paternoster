@@ -70,9 +70,14 @@
                         </ul>
                     </div>
                 </div>
-                <div class="Product-Header">
-                    <a class="btn btn-primary" asp-route-id="@product.Id" asp-page="/EditPages/EditProduct">&#128393</a>
-                </div>
+
+                @if (User.IsInRole("Sales") || User.IsInRole("Administrator"))
+                {
+                    <div class="CRUD-buttons">
+                        <a class="CRUD-Button" asp-route-id="@product.Id" asp-page="/EditPages/EditProduct">Wijzigen</a>
+                        <a class="CRUD-Button" asp-route-id="@product.Id" asp-page="/DeletePages/DeleteProduct">Verwijderen</a>
+                    </div>
+                }
 
             </div>
         }
