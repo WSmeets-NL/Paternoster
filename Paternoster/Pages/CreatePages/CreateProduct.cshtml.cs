@@ -19,6 +19,8 @@ public class CreateProductModel : PageModel
 
     public List<Part> ChosenParts { get; set; } = new List<Part>();
 
+    public List<ProductPart> ProductParts { get; set; } = new List<ProductPart>();
+
     [BindProperty]
     public Product Product { get; set; } = default!;
 
@@ -50,7 +52,26 @@ public class CreateProductModel : PageModel
         }    
 
         _context.Products.Add(Product);
+
         await _context.SaveChangesAsync();
+
+        Product createdProduct = await _context.Products.Where(p => p.ProductCode == Product.ProductCode).FirstOrDefaultAsync();
+
+        foreach(Part part in ChosenParts)
+        {
+            ProductPart productPart = new ProductPart()
+            {
+                Id = 0,
+                PartId = part.Id,
+                ProductId = createdProduct.Id,
+                PartAmount = 1
+            };
+            ProductParts.Append(productPart);
+        }
+
+        _context.ProductParts.AddRange(ProductParts);
+        await _context.SaveChangesAsync();
+
 
         return RedirectToPage("/Products", new { name = Product.Name});
     }

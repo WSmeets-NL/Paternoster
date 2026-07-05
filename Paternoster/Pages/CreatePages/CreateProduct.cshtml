@@ -38,17 +38,25 @@
             </div>
             
             <div class="add-parts">
-                <label>Voeeg onderdelen toe:</label>
-                <button id="add-part">Onderdeel toevoegen</button>
-                <div class="part-row">
-                    <select>
-                        <option value="null">---nieuw onderdeel---</option>
-                        @foreach(Part part in Model.AvailableParts)
+                <label class="control-label">Voeg onderdelen toe:</label>
+
+                <div id="part-template">
+                    <input type="hidden" id="total" value="1"/>
+                    <button class="btn btn-primary add-part" type="button">onderdeel toevoegen</button>
+                    <div class="part-row">
+                        <select name="ChosenParts[0].PartId" class="part-select">
+                            <option value="">---nieuw onderdeel---</option>
+                            @foreach (var part in Model.AvailableParts)
                             {
                                 <option value="@part.Id">@part.Name</option>
                             }
-                    </select>
+                        </select>
+                        <button type="button" class="remove-part btn btn-primary">Verwijderen</button>
+                    </div>
                 </div>
+
+                <div id="parts-container"></div>
+
             </div>
             <div class="form-group">
                 <input type="submit" value="Product Aanmaken" class="btn btn-primary" />
@@ -64,32 +72,25 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script>  
-    $("add-part").click(function ()  
-    {  
-        var rowCount = parseInt($("#total").val());  
-        rowCount++;  
-        $("#total").val(rowCount);  
-        var html = '';  
-        html += '<div class="part-row">'            
-        html += '<select>';
-        html += '<option value="null">---nieuw onderdeel---</option>';
-        html += '@foreach(Part part in Model.AvailableParts)'
-        html += '{<option value="@part.Id">@part.Name</option>}';
-        html += '</select>';
-        html += '</div>';
-        html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';  
-        html += '</div>';  
-  
-        $('#newRow').append(html);  
-    });  
-    $(document).on('click', '#removeRow', function ()  
-    {  
-        var rowCount = parseInt($("#total").val());  
-        rowCount--;  
-        $("#total").val(rowCount);  
-        $(this).closest('#inputRow').remove();  
-    });  
+    <script>
+        $(".add-part").click(function () {
+
+            var rowCount = parseInt($("#total").val());
+            $("#total").val(rowCount + 1);
+
+            // Clone template
+            var newRow = $("#part-template .part-row").clone();
+
+            // Index correct zetten voor modelbinding
+            newRow.find("select").attr("name", "ChosenParts[" + rowCount + "].PartId");
+
+            $("#parts-container").append(newRow);
+        });
+
+        // Dynamisch verwijderbare rijen
+        $(document).on("click", ".remove-part", function () {
+            $(this).closest(".part-row").remove();
+        });
     </script>  
 }
 
