@@ -457,3 +457,53 @@ h4 {
     color: #1a252f;
     margin-bottom: 0.5rem;
 }
+
+.CRUD-buttons, .delete-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.CRUD-Button {
+    display: inline-block;
+    width: 50%;
+    padding: 8px 12px;
+    background-color: #0078d4;
+    border-radius: 6px;
+    font-size: 20px;
+    color: #000000;
+    text-decoration: none;
+    align-content: center;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    transition: background 0.2s ease;
+}
+
+.delete-button {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: lightcoral;
+    border-radius: 6px;
+    font-size: 20px;
+    color: #000000;
+    text-decoration: none;
+    align-content: center;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    transition: background 0.2s ease;
+}
+
+
+.return-button {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: lightskyblue;
+    border-radius: 6px;
+    font-size: 20px;
+    color: #000000;
+    text-decoration: none;
+    align-content: center;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    transition: background 0.2s ease;
+}
