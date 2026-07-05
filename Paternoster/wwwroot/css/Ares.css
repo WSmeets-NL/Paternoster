@@ -507,3 +507,196 @@ h4 {
     text-align: center;
     transition: background 0.2s ease;
 }
+
+/* ====== Algemene layout ====== */
+.order-products,
+.order-completion {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e2e6ea;
+}
+
+/* ====== Productlijst ====== */
+.workorder-productlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.workorder-product {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+    .workorder-product:hover {
+        background: #f1f3f5;
+    }
+
+/* ====== Order voltooiing ====== */
+.complete-order {
+    padding: 1rem;
+    background: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    border-radius: 6px;
+}
+
+.incomplete-order {
+    padding: 1rem;
+    background: #fdecea;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+}
+
+    .incomplete-order p {
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+    }
+
+/* ====== Buttons ====== */
+.btn-primary {
+    background-color: #0069d9;
+    border-color: #0062cc;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #0053ba;
+        transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+/* ====== Terug naar orders ====== */
+a.btn-primary {
+    margin-top: 1rem;
+    display: inline-block;
+}
+
+/* ====== Form styling ====== */
+.form-group {
+    margin-top: 1rem;
+}
+
+/* ===========================
+   ORDER PRODUCT SECTION
+   =========================== */
+
+.order-products {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e2e6ea;
+}
+
+/* Productlijst */
+.workorder-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.workorder-product {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.6rem;
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.2s ease;
+}
+
+    .workorder-product:hover {
+        background: #f1f3f5;
+    }
+
+/* ===========================
+   ORDER COMPLETION BLOCK
+   =========================== */
+
+.order-completion {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #e2e6ea;
+}
+
+/* Voltooibare order */
+.complete-order {
+    padding: 1rem;
+    border: 1px solid #c8e6c9;
+    border-radius: 6px;
+}
+
+/* Niet-voltooibare order */
+.incomplete-order {
+    padding: 1rem;
+    background: #fdecea;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+}
+
+    .incomplete-order p {
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+    }
+
+/* Missing parts list */
+.workorder-part {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.6rem;
+    background: #ffffff;
+    border: 1px solid #f5c6cb;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #b30000;
+}
+
+/* ===========================
+   BUTTON CONSISTENCY
+   =========================== */
+
+.order-completion .btn-primary {
+    margin-top: 0.5rem;
+}
+
+/* Algemene layout */
+.new-item {
+    background: #f8f9fa;
+    border: 1px solid #e3e6e8;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+    /* Hover-effect voor kaarten */
+    .new-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* Titels */
+    .new-item h5 {
+        margin-bottom: 15px;
+        font-weight: 600;
+        color: #343a40;
+    }

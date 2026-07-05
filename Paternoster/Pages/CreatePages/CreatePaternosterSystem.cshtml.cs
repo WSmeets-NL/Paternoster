@@ -37,6 +37,6 @@ public class CreatePaternosterSystemModel : PageModel
         _context.PaternosterSystems.Add(PaternosterSystem);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("/Inventory");
+        return RedirectToPage("/ItemAdded", new { itemType = "Paternostersysteem"});
     }
 }

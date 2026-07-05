@@ -54,6 +54,6 @@ public class CreatePaternosterModel : PageModel
         _context.PaternosterContainers.AddRange(newContainers);
         await _context.SaveChangesAsync();
 
-        return RedirectToPage("/Inventory", new { PaternosterId = Paternoster.Id});
+        return RedirectToPage("/ItemAdded", new { itemType = "Paternoster"});
     }
 }

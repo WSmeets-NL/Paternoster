@@ -7,37 +7,31 @@
     ViewData["Title"] = "Edit";
 }
 
-<h4>@Model.Order.OrderCode</h4>
+<h4>Order voor: @Model.Order.Customer.Name</h4>
+<h4>Ordernummr: @Model.Order.OrderCode</h4>
+
 <hr />
 
-<h5>Figurines</h5>
-<div class="row">
-<<ul>
+<h5>Producten in deze order:</h5>
+<p>Gebruik de checkboxes om bij te houden welke producten gemonteerd zijn.</p>
+<div class="order-products">
+<ul class="workorder-list">
 @foreach(OrderLine orderLine in Model.OrderLines)
         {
-            <li>@orderLine.ProductAmount X @orderLine.Product.Name</li>
+            <li class="workorder-product"><input type="checkbox" />@orderLine.ProductAmount X @orderLine.Product.Name</li>
         }
-
 </ul>
 </div>
 
-<div class="row">
-    <<ul>
-        @foreach (ProductPart productPart in Model.ProductParts)
-        {
-            
-        }
-
-    </ul>
-</div>
 
 
-
-<div class="row">
+<div class="order-completion">
     @if (Model.IsFinishable != false)
     {
-        <div class="col-md-4">
+        <div class="complete-order">
         <form method="post">
+            <input hidden asp-for="Order.Id" />
+            <input hidden asp-for="Order.OrderCode" />
             <div class="form-group">
                 <input type="submit" value="Voltooi Order" class="btn btn-primary" />
             </div>
@@ -46,18 +40,22 @@
     }
     else
     {
-        <div class="col-md-4">
+        <div class="incomplete-order">
             <p>Sorry, maar van de volgende onderdelen is er niet genoeg op voorraad:</p>
-            <ul>
-
+            <ul class="workorder-list">
+                @foreach(Part part in Model.MissingParts)
+                {
+                    <li class="workorder-part">@part.Name</li>
+                }
             </ul>
+            <p>Neem alstublieft contact op met de voorraadbeheerder.</p>
         </div>
     }
    
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a class="btn btn-primary" asp-page="/Orders">Terug naar orders</a>
 </div>
 
 @section Scripts {

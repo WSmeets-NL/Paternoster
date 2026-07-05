@@ -1,0 +1,38 @@
+﻿@page
+@model ItemAddedModel
+@{
+}
+
+<h1>Aanmaak succesvol</h1>
+
+
+@if(Model.AddedItem == "Paternostersysteem")
+{
+    <h4>Paternostersysteem is succesvol aangemaakt.</h4>
+    <div class="new-item">
+        <h5>Klik op onderstaande knop om een nieuwe paternoster aan te maken.</h5>
+        <a type="button" class="btn btn-primary" asp-page="/CreatePages/CreatePaternoster">Nieuwe Paternoster</a>
+    </div>
+    <div class="new-item">
+        <h5>Of Klik op deze knop om nog een paternostersysteem aan te maken.</h5>
+        <a type="button" class="btn btn-primary" asp-page="/CreatePages/CreatePaternosterSystem">Nieuw paternostersysteem</a>
+    </div>
+}
+else if (Model.AddedItem == "Paternoster")
+{
+
+    <h4>Paternoster is succesvol aangemaakt.</h4>
+    <div class="new-item">
+        <h5>Klik op onderstaande knop om een nieuw onderdeel aan te maken.</h5>
+        <a type="button" class="btn btn-primary" asp-page="/CreatePages/CreatePart">Nieuw Onderdeel</a>
+    </div class="new-item">
+    <div class="new-item">
+        <h5>Of Klik op deze knop om nog een paternoster aan te maken.</h5>
+        <a type="button" class="btn btn-primary" asp-page="/CreatePages/CreatePaternoster">Nieuwe Paternoster</a>
+    </div class="new-item">
+}
+
+<div class="new-item">
+    <h5>Klik hier om terug te keren naar 'Voorraad'</h5>
+    <a type="button" class="btn btn-primary" asp-page="/inventory">Terug naar Voorraad</a>
+</div>

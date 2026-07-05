@@ -12,13 +12,18 @@ public class WorkOrderModel : PageModel
 {
     private readonly PaternosterDbContext _context;
 
+    public Customer OrderCustomer { get; set; }
     public List<OrderLine> OrderLines { get; set; } = new List<OrderLine>();
     public List<Product> Products { get; set; } = new List<Product>();
-    public List<ProductPart> ProductParts{ get; set; } = new List<ProductPart>();
+    public List<Part> RequiredParts{ get; set; } = new List<Part>();
+
+    public List<PaternosterContainer> Containers { get; set; } = new List<PaternosterContainer>();
+
 
     public List<Part> Parts { get; set; } = new List<Part>();
+    public List<Part> MissingParts { get; set; } = new List<Part>();
 
-    public bool IsFinishable { get; set; }
+    public bool IsFinishable { get; set; } = true;
 
     public WorkOrderModel(PaternosterDbContext context)
     {
@@ -26,7 +31,7 @@ public class WorkOrderModel : PageModel
     }
 
     [BindProperty]
-    public Order Order { get; set; } = default!;
+    public Order Order { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -37,12 +42,14 @@ public class WorkOrderModel : PageModel
         }
 
         var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+
         if (order is null)
         {
             return NotFound();
         }
-
         Order = order;
+        OrderCustomer = (Customer) await _context.Customers.FirstOrDefaultAsync(c => c.Id == Order.CustomerId);
+
         OrderLines.AddRange(_context.OrderLines.ToList().Where(ol => ol.OrderId == order.Id));
 
         foreach(OrderLine orderLine in OrderLines) 
@@ -50,17 +57,35 @@ public class WorkOrderModel : PageModel
             Products.AddRange(_context.Products.ToList().Where(p => p.Id == orderLine.ProductId));
         }
 
+        List<ProductPart> partsNeeded = new List<ProductPart>();
         foreach(Product product in Products)
         {
-           ProductParts.AddRange(_context.ProductParts.ToList().Where(pp => pp.ProductId == product.Id));
+            partsNeeded.AddRange(_context.ProductParts.ToList().Where(p => p.ProductId == product.Id));
         }
 
-        foreach(ProductPart productPart in ProductParts)
+        foreach(ProductPart productPart in partsNeeded)
         {
             Parts.AddRange(_context.Parts.ToList().Where(p => p.Id == productPart.PartId));
-            Parts.OrderBy(p => p.Id);
         }
-    
+
+        foreach(Part part in Parts)
+        {
+            int requiredAmount = RequiredParts.Count(p => p.Id == part.Id);
+            PaternosterContainer container = await _context.PaternosterContainers.FirstOrDefaultAsync(c => c.PartId == part.Id);
+            int availableAmount = container.PartAmount;
+
+            if (availableAmount > requiredAmount)
+            {
+                continue;
+            }
+            else
+            {
+                IsFinishable = false;
+                MissingParts.Add(part);
+            }
+        }
+
+        MissingParts.DistinctBy(p => p.Id);
 
         return Page();
     }
@@ -69,11 +94,30 @@ public class WorkOrderModel : PageModel
     // For more details, see https://aka.ms/RazorPagesCRUD.
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid)
+
+        List<PaternosterContainer> usedContainers = new List<PaternosterContainer>();
+
+        foreach (Product createdProduct in Products)
         {
-            return Page();
+            foreach (ProductPart productPart in createdProduct.ProductParts)
+            if (usedContainers.Contains(productPart.Part.Container) == false)
+            {
+                productPart.Part.Container.PartAmount -= productPart.PartAmount;
+                usedContainers.Add(productPart.Part.Container);
+            }
+            else
+            {
+                PaternosterContainer containerUsed = usedContainers.FirstOrDefault(c => c.Id == productPart.Part.ContainerId);
+                containerUsed.PartAmount -= productPart.PartAmount;
+            }
         }
 
+        foreach(PaternosterContainer container in usedContainers)
+        {
+            _context.Attach(container).State = EntityState.Modified;
+        }
+
+        Order.IsFinished = true;
         _context.Attach(Order).State = EntityState.Modified;
 
         try
