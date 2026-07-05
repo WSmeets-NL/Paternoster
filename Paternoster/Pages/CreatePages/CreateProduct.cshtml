@@ -1,5 +1,6 @@
 @page
 @model CreateProductModel
+@using Paternoster.Models
 
 @{
     ViewData["Title"] = "Create";
@@ -35,7 +36,20 @@
                 <input type="file" asp-for="Product.ProductImage" class="form-control" />
                 <span asp-validation-for="Product.ProductImage" class="text-danger"></span>
             </div>
-
+            
+            <div class="add-parts">
+                <label>Voeeg onderdelen toe:</label>
+                <button id="add-part">Onderdeel toevoegen</button>
+                <div class="part-row">
+                    <select>
+                        <option value="null">---nieuw onderdeel---</option>
+                        @foreach(Part part in Model.AvailableParts)
+                            {
+                                <option value="@part.Id">@part.Name</option>
+                            }
+                    </select>
+                </div>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Product Aanmaken" class="btn btn-primary" />
             </div>
@@ -49,4 +63,33 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>  
+    $("add-part").click(function ()  
+    {  
+        var rowCount = parseInt($("#total").val());  
+        rowCount++;  
+        $("#total").val(rowCount);  
+        var html = '';  
+        html += '<div class="part-row">'            
+        html += '<select>';
+        html += '<option value="null">---nieuw onderdeel---</option>';
+        html += '@foreach(Part part in Model.AvailableParts)'
+        html += '{<option value="@part.Id">@part.Name</option>}';
+        html += '</select>';
+        html += '</div>';
+        html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';  
+        html += '</div>';  
+  
+        $('#newRow').append(html);  
+    });  
+    $(document).on('click', '#removeRow', function ()  
+    {  
+        var rowCount = parseInt($("#total").val());  
+        rowCount--;  
+        $("#total").val(rowCount);  
+        $(this).closest('#inputRow').remove();  
+    });  
+    </script>  
 }
+

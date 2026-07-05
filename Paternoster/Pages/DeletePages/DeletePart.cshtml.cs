@@ -1,11 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Paternoster.Models;
 using Paternoster.DAL;
+using Paternoster.Models;
 
 namespace Paternoster.Pages.DeletePages;
 
+[Authorize(Roles = "Administrator, Inventory")]
 public class DeletePartModel : PageModel
 {
     private readonly PaternosterDbContext _context;

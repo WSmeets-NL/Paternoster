@@ -15,10 +15,14 @@ public class CreateProductModel : PageModel
 
     private IWebHostEnvironment _environment;
 
+    public List<Part> AvailableParts { get; set; } = new List<Part>();
+
+    public List<Part> ChosenParts { get; set; } = new List<Part>();
+
     [BindProperty]
     public Product Product { get; set; } = default!;
 
-    [Obsolete]
+
     public CreateProductModel(PaternosterDbContext context, IWebHostEnvironment environment)
     {
         _context = context;
@@ -27,6 +31,7 @@ public class CreateProductModel : PageModel
 
     public IActionResult OnGet()
     {
+        AvailableParts.AddRange(_context.Parts.ToList());
         return Page();
     }
 
